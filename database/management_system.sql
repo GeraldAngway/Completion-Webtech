@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 DROP TABLE IF EXISTS `utilization`;
 CREATE TABLE IF NOT EXISTS `utilization` (
-  `UtilizationID` int NOT NULL,
+  `UtilizationID` int NOT NULL AUTO_INCREMENT,
   `UserID` int DEFAULT NULL,
   `Date` date DEFAULT NULL,
   `Time` time DEFAULT NULL,
