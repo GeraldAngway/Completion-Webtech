@@ -14,14 +14,14 @@
 
     <section>
         <div class="f">
-            <form action="">
-                <input type="text" id="fdate" placeholder="Date (mm/dd/yyy)">
+            <form id="reservationForm">
+                <input type="text" id="fdate" placeholder="Date (mm/dd/yyyy)">
                 <input type="text" id="ftime" placeholder="Time Util">
-                <select id="country" id="froom" name="room">
-                    <option value="option1">room1</option>
-                    <option value="option2">room2</option>
-                    <option value="option3">room3</option>
-                  </select>
+                <select id="froom" name="room">
+                    <option value="BYOD">BYOD (D-422)</option>
+                    <option value="KnowledgeCenter">Knowledge Center (D-424)</option>
+                    <option value="TRIL">TRIL (D-422)</option>
+                </select>
                 <input type="text" id="fpurpose" placeholder="Purpose">
                 <input type="submit" value="Submit">
             </form>
@@ -30,44 +30,14 @@
         <div class="tb">
             <table style="width: 100%;">
                 <tr>
-                    <th>Date (mm/dd/yyy)</th>
+                    <th>Date (mm/dd/yyyy)</th>
                     <th>Time</th>
                     <th>Room</th>
                     <th>Purpose</th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-
             </table>
         </div>
     </section>
+    <script src="student.js"></script>
 </body>
 </html>
