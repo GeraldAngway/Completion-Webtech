@@ -1,5 +1,10 @@
 <?php
-session_start(); 
+session_start();
+
+if (!isset($_SESSION['UserID'])) {
+    header("Location: login.php"); 
+    exit();
+}
 
 $servername = "localhost";
 $username = "root";
@@ -13,7 +18,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//Log utilization
+// Log utilization
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
     $selectedDate = $_POST["utilization_date"];
     $currentTime = date("Y-m-d"); // Current date
@@ -33,6 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
 
         if ($stmt->execute()) {
             echo "Utilization logged successfully!";
+            // Redirect to the same page after successful logging
+            header("Location: index.php");
+            exit();
         } else {
             echo "Error logging utilization: " . $stmt->error;
         }
@@ -41,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
     }
 }
 
-// history of utilization
+// History of utilization
 $userID = $_SESSION['UserID'];
 $sql = "SELECT * FROM utilization WHERE UserID = ?";
 $stmt = $conn->prepare($sql);
