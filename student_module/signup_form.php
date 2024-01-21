@@ -1,8 +1,6 @@
 <script src="../javascript/signup.js" defer></script>
 <link rel="stylesheet" href="../student_module/signup.css">
 
-
-
 <?php
 if (!empty($errors)) {
     echo '<div style="color: red;">';
@@ -74,8 +72,6 @@ if (!empty($successMessage)) {
     </div>
 
 </div>
-
-
 
 <?php
 if (!empty($successMessage)) {
