@@ -2,10 +2,9 @@
 include '../database/db.php';
 
 $errors = array();
-$successMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
     $idNumber = $_POST['idNumber'];
     $fName = $_POST['fName'];
     $lName = $_POST['lName'];
@@ -14,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cpassword = $_POST['cpassword'];
 
     if ($password !== $cpassword) {
-        $errors[] = "Password and confirm password do not match.";
+        $errors[] = "Password and confirm password do not match";
     }
 
     if (strlen($password) < 8 || strlen($password) > 16) {
-        $errors[] = "Password must be between 8 and 16 characters in length.";
+        $errors[] = "Password must be 8 to 16 characters in length";
     }
 
     $checkSluSql = "SELECT COUNT(*) FROM slu WHERE IDNumber = ?";
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkSluStmt->close();
 
     if ($sluCount === 0) {
-        $errors[] = "Invalid ID number. Please check and try again.";
+        $errors[] = "Invalid ID number. Please check and try again";
     }
 
     $checkIdNumberSql = "SELECT COUNT(*) FROM users WHERE IDNum = ?";
@@ -42,21 +41,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkIdNumberStmt->close();
 
     if ($idNumberCount > 0) {
-        $errors[] = "ID number already exists in the database.";
+        $errors[] = "ID number is already registered";
     }
 
-    if (empty($errors)) { // If there are no errors, proceed with registration
+    if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $role ='Student';
 
         $sql = "INSERT INTO users (IDNum, FirstName, LastName, Program, Role) VALUES (?, ?, ?, ?, ?)";
-        
+
         $stmt = $db->prepare($sql);
         $stmt->bind_param("sssss", $idNumber, $fName, $lName, $program, $role);
 
         if ($stmt->execute()) {
-        
+
             $userID = $stmt->insert_id;
             $passwordStatus = 0;
             $accountStatus = 'Active';
@@ -67,7 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtAccounts->bind_param("isiss", $userID, $hashedPassword, $passwordStatus, $accountStatus, $userStatus);
 
             if ($stmtAccounts->execute()) {
-                $successMessage = "Registration successful!";
+                echo "<script>alert('Registration Successful');
+                        window.location.href = '../index.php';
+                     </script>";
             } else {
                 $errors[] = $stmtAccounts->error;
             }
@@ -81,7 +82,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->close();
     }
 }
-
-include 'signup_form.php'; // Include the signup form at the end
-
+include 'signup_form.php';
 ?>
