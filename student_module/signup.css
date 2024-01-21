@@ -1,0 +1,151 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle, #060f8a, #eee, #ffef11);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.box-container {
+    background-color: #fafafada;
+    width: 120%;
+    max-width: 1250px;
+    height: 83vh;
+    padding: 35px;
+    border-radius: 5px;
+    box-shadow: 0 0 2pxrgba(116, 116, 116, 0.678);
+}
+
+.box-container img {
+    max-width: 7%;
+    height: auto;
+    display: block;
+    margin-left: 280px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+header {
+    color: #060f8a;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: 280px;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.idnum label {
+    color: #060f8a;
+    margin-left: 5%;
+    margin-bottom: 10px;
+}
+
+.idnum input {
+    width: 23%;
+    height: 30px;
+    margin-left: 6%;
+    margin-bottom: 12px;
+}
+
+.fn label {
+    color: #060f8a;
+    margin-top: 10px;
+    margin-left: 5%;
+}
+
+.fn input {
+    width: 23%;
+    height: 30px;
+    margin-left: 6%;
+    margin-bottom: 15px;
+}
+
+.ln label {
+    color: #060f8a;
+    margin-left: 5%;
+}
+
+.ln input {
+    width: 23%;
+    height: 30px;
+    margin-left: 6%;
+    margin-bottom: 15px;
+}
+
+.prog label {
+    color: #060f8a;
+    margin-left: 5%;
+}
+
+.prog select {
+    width: 23%;
+    height: 32px;
+    margin-left: .7%;
+    margin-bottom: 15px;
+}
+
+.ps label {
+    color: #060f8a;
+    margin-left: 5%;
+}
+
+.ps input {
+    width: 23%;
+    height: 30px;
+    margin-left: 6.6%;
+    margin-bottom: 15px;
+}
+
+.pps label {
+    color: #060f8a;
+    margin-left: 5%;
+}
+
+.pps input {
+    width: 23%;
+    height: 30px;
+    margin-left: 1%;
+    margin-bottom: 7px;
+}
+
+.check span {
+    color: #060f8a;
+    font-size: 12px;
+}
+
+.check input {
+    margin-left: 32%;
+}
+
+input[type="submit"] {
+    font-family: 'Poppins', sans-serif;
+    background-color: #060f8a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    text-align: center;
+    margin-left: 260px;
+    display: inline-block;
+    font-weight: 500;
+}
+
+input[type="submit"]:hover {
+    background-color: #040a55;
+}
+
+.image img {
+    max-width: 40%;
+    height: auto;
+    align-items: center;
+    float: right;
+    margin-top: -43%;
+    margin-right: 6.5%;
+}
