@@ -37,11 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../student_module/login.css">
     <title>Login</title>
 </head>
 <body>
 
-<h2>Login</h2>
+<div class="box-container">
+    <img src="../images/logo.png" alt="top-logo">
+    <header>LOG IN</header>
 
 <?php
 if (isset($loginError)) {
@@ -50,8 +53,17 @@ if (isset($loginError)) {
 ?>
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    ID Number: <input type="text" name="idNumber" required><br>
-    Password: <input type="password" name="password" required><br>
+
+    <div class="idnum"> 
+    <label for="idNumber">ID Number: </label>
+    <input type="text" name="idNumber" required><br>
+    </div>
+
+    <div class="pass">
+    <label for="password">Password: </label>
+    <input type="password" name="password" required><br>
+    </div>
+
     <input type="submit" value="Login">
 </form>
 

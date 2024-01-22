@@ -1,0 +1,64 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle, #060f8a, #eee, #ffef11);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.box-container {
+    background-color: #fafafada;
+    width: 120%;
+    max-width: 1250px;
+    height: 83vh;
+    padding: 35px;
+    border-radius: 5px;
+    box-shadow: 0 0 2pxrgba(116, 116, 116, 0.678);
+}
+
+.box-container img {
+    max-width: 7%;
+    height: auto;
+    display: block;
+    margin-left: 280px;
+    margin-bottom: 20px;
+    margin-top: 70px;
+}
+
+header {
+    color: #060f8a;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: 280px;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.idnum label {
+    color: #060f8a;
+    margin-left: 5%;
+    margin-bottom: 10px;
+}
+
+.idnum input {
+    width: 23%;
+    height: 30px;
+    margin-left: 6%;
+    margin-bottom: 12px;
+}
+
+.pass label {
+    color: #060f8a;
+    margin-left: 5%;
+    margin-bottom: 10px;
+}
+
+.pass input {
+    width: 23%;
+    height: 30px;
+    margin-left: 6.5%;
+    margin-bottom: 12px;
+}
