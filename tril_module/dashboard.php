@@ -33,10 +33,10 @@
     }
 
     // SQL query with search conditions, sorting, and filtering
-    $sql = "SELECT users.FirstName, users.LastName, users.ID_Number, users.Program, utilization.Purpose, utilization.Room, utilization.Date, utilization.Time
+    $sql = "SELECT users.FirstName, users.LastName, users.IDNum, users.Program, utilization.Purpose, utilization.Room, utilization.Date, utilization.Time
             FROM utilization
             INNER JOIN users ON utilization.UserID = users.UserID
-            WHERE users.ID_Number LIKE '%$searchIDNumber%'
+            WHERE users.IDNum LIKE '%$searchIDNumber%'
             AND CONCAT(users.FirstName, ' ', users.LastName) LIKE '%$searchStudentName%'
             AND utilization.Purpose LIKE '%$searchPurpose%'
             AND users.Program LIKE '%$searchProgram%'
@@ -62,7 +62,7 @@
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
                     <td>{$row['FirstName']} {$row['LastName']}</td>
-                    <td>{$row['ID_Number']}</td>
+                    <td>{$row['IDNum']}</td>
                     <td>{$row['Program']}</td>
                     <td>{$row['Purpose']}</td>
                     <td>{$row['Room']}</td>
@@ -76,41 +76,87 @@
         echo "No utilization records found.";
     }
 
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Get the current date
+    $currentDate = date("Y-m-d");
+
+    // SQL query to count the number of users on the current date
+    $countUsersSQL = "SELECT COUNT(DISTINCT UserID) as userCount FROM utilization WHERE Date = '$currentDate'";
+    $userCountResult = $conn->query($countUsersSQL);
+
+    // Check if there are results
+    if ($userCountResult->num_rows > 0) {
+        $row = $userCountResult->fetch_assoc();
+        $userCount = $row['userCount'];
+
+        // Output the total number of users
+        echo "<p>Total Users Today: $userCount</p>";
+    } else {
+        echo "Error counting users.";
+    }
+
+
     // Close the connection
     $conn->close();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
 
-<!-- Sorting, and Filtering -->
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="searchIDNumber">ID Number:</label>
-    <input type="text" name="searchIDNumber" value="<?php echo $searchIDNumber; ?>">
+    <!-- Sorting, and Filtering -->
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <label for="searchIDNumber">ID Number:</label>
+        <input type="text" name="searchIDNumber" value="<?php echo $searchIDNumber; ?>">
 
-    <label for="searchStudentName">Student Name:</label>
-    <input type="text" name="searchStudentName" value="<?php echo $searchStudentName; ?>">
+        <label for="searchStudentName">Student Name:</label>
+        <input type="text" name="searchStudentName" value="<?php echo $searchStudentName; ?>">
 
-    <label for="searchPurpose">Purpose:</label>
-    <input type="text" name="searchPurpose" value="<?php echo $searchPurpose; ?>">
+        <label for="searchPurpose">Purpose:</label>
+        <input type="text" name="searchPurpose" value="<?php echo $searchPurpose; ?>">
 
-    <label for="searchProgram">Program:</label>
-    <input type="text" name="searchProgram" value="<?php echo $searchProgram; ?>">
+        <label for="searchProgram">Program:</label>
+        <input type="text" name="searchProgram" value="<?php echo $searchProgram; ?>">
+    </form>
 
-    <label for="sortField">Sort By:</label>
-    <select name="sortField">
-        <option value="users.FirstName" <?php echo ($sortField == 'users.FirstName') ? 'selected' : ''; ?>>Name</option>
-        <option value="users.ID_Number" <?php echo ($sortField == 'users.ID_Number') ? 'selected' : ''; ?>>ID</option>
-        <option value="users.Program" <?php echo ($sortField == 'users.Program') ? 'selected' : ''; ?>>Program</option>
-        <option value="utilization.Purpose" <?php echo ($sortField == 'utilization.Purpose') ? 'selected' : ''; ?>>Purpose</option>
-        <option value="utilization.Room" <?php echo ($sortField == 'utilization.Room') ? 'selected' : ''; ?>>Room</option>
-        <option value="utilization.Date" <?php echo ($sortField == 'utilization.Date') ? 'selected' : ''; ?>>Date</option>
-        <option value="utilization.Time" <?php echo ($sortField == 'utilization.Time') ? 'selected' : ''; ?>>Time</option>
-        <!-- Add more options for other fields as needed -->
-    </select>
+    <form>
+        <label for="sortField">Sort By:</label>
+        <select name="sortField">
+            <option value="users.FirstName" <?php echo ($sortField == 'users.FirstName') ? 'selected' : ''; ?>>Name</option>
+            <option value="users.IDNum" <?php echo ($sortField == 'users.IDNum') ? 'selected' : ''; ?>>ID</option>
+            <option value="users.Program" <?php echo ($sortField == 'users.Program') ? 'selected' : ''; ?>>Program</option>
+            <option value="utilization.Purpose" <?php echo ($sortField == 'utilization.Purpose') ? 'selected' : ''; ?>>Purpose</option>
+            <option value="utilization.Room" <?php echo ($sortField == 'utilization.Room') ? 'selected' : ''; ?>>Room</option>
+            
+        </select>
 
-    <label for="sortOrder">Sort Order:</label>
-    <select name="sortOrder">
-        <option value="ASC" <?php echo ($sortOrder == 'ASC') ? 'selected' : ''; ?>>Ascending</option>
-        <option value="DESC" <?php echo ($sortOrder == 'DESC') ? 'selected' : ''; ?>>Descending</option>
-    </select>
+        <label for="sortOrder">Sort Order:</label>
+        <select name="sortOrder">
+            <option value="ASC" <?php echo ($sortOrder == 'ASC') ? 'selected' : ''; ?>>Ascending</option>
+            <option value="DESC" <?php echo ($sortOrder == 'DESC') ? 'selected' : ''; ?>>Descending</option>
+        </select>
 
-    <input type="submit" value="Search">
-</form>
+        <input type="submit" value="Search">
+    </form>
+
+    <!-- Logout form -->
+    <form method="post" action="logout.php">
+        <input type="submit" name="logout" value="Logout">
+    </form>
+    <br>
+    <hr>
+    <!-- Display current date -->
+    <p>Current Date: <?php echo date("Y-m-d"); ?></p>
+
+    <!-- Display current time -->
+    <p>Current Time: <?php echo date("H:i:s"); ?></p>
+</body>
+</html>

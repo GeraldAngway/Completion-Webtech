@@ -73,8 +73,6 @@ if (!empty($successMessage)) {
 
 </div>
 
-
-
 <?php
 if (!empty($successMessage)) {
     echo '<script src="../javascript/signup.js"></script>';
