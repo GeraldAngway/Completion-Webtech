@@ -110,7 +110,7 @@ header {
     transition: background-color 0.3s ease;
     align-items: center;
     text-align: center;
-    margin-left: 295px;
+    margin-left: 265px;
     margin-top: 15px;
     display: inline-block;
     font-weight: 500;
@@ -133,8 +133,8 @@ button {
     transition: background-color 0.3s ease;
     align-items: center;
     text-align: center;
-    margin-left: 180px;
-    margin-top: -58px;
+    margin-left: 256px;
+    margin-top: 12px;
     display: inline-block;
     font-weight: 500;
 }
@@ -143,10 +143,9 @@ a {
     text-decoration: none;
     align-items: center;
     text-align: center;
-    margin-left: 250px;
+    margin-left: 240px;
     color: #060f8a;
     font-size: 15px;
-
 }
 
 a:hover {
@@ -158,6 +157,6 @@ a:hover {
     height: auto;
     align-items: center;
     float: right;
-    margin-top: -38.5%;
+    margin-top: -43%;
     margin-right: 6.5%;
 }

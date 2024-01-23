@@ -34,7 +34,6 @@
     </div>
     
 
-    <!--Sign-Up button -->
     <button class="signup_button" type="button" onclick="window.location.href='student-module/signup_form.php'">Sign-Up</button>
     <br><br>
 
