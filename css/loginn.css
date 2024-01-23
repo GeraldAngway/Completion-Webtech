@@ -25,7 +25,7 @@ body {
     display: block;
     margin-left: 280px;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 70px;
 }
 
 header {
@@ -39,88 +39,35 @@ header {
 
 .idnum label {
     color: #060f8a;
+    margin-top: 10px;
     margin-left: 5%;
     margin-bottom: 10px;
 }
 
 .idnum input {
     width: 23%;
-    height: 30px;
+    height: 29px;
+    margin-top: 10px;
     margin-left: 6%;
+    margin-bottom: 18px;
+}
+
+.pass label {
+    color: #060f8a;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.pass input {
+    width: 23%;
+    height: 29px;
+    margin-left: 6.5%;
+    margin-top: 10px;
     margin-bottom: 12px;
 }
 
-.fn label {
-    color: #060f8a;
-    margin-top: 10px;
-    margin-left: 5%;
-}
-
-.fn input {
-    width: 23%;
-    height: 30px;
-    margin-left: 6%;
-    margin-bottom: 15px;
-}
-
-.ln label {
-    color: #060f8a;
-    margin-left: 5%;
-}
-
-.ln input {
-    width: 23%;
-    height: 30px;
-    margin-left: 6%;
-    margin-bottom: 15px;
-}
-
-.prog label {
-    color: #060f8a;
-    margin-left: 5%;
-}
-
-.prog select {
-    width: 23%;
-    height: 32px;
-    margin-left: .7%;
-    margin-bottom: 15px;
-}
-
-.ps label {
-    color: #060f8a;
-    margin-left: 5%;
-}
-
-.ps input {
-    width: 23%;
-    height: 30px;
-    margin-left: 6.6%;
-    margin-bottom: 15px;
-}
-
-.pps label {
-    color: #060f8a;
-    margin-left: 5%;
-}
-
-.pps input {
-    width: 23%;
-    height: 30px;
-    margin-left: 1%;
-    margin-bottom: 7px;
-}
-
-.check span {
-    color: #060f8a;
-    font-size: 12px;
-}
-
-.check input {
-    margin-left: 32%;
-}
-
-input[type="submit"] {
+.button input[type="submit"] {
     font-family: 'Poppins', sans-serif;
     background-color: #060f8a;
     color: #fff;
@@ -132,17 +79,17 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
     align-items: center;
     text-align: center;
-    margin-left: 290px;
+    margin-left: 267px;
     display: inline-block;
     font-weight: 500;
+    margin-top: 30px;
 }
 
-input[type="submit"]:hover {
+.button input[type="submit"]:hover {
     background-color: #040a55;
 }
 
-
-.back input[type="submit"] {
+.signup input[type="submit"] {
     font-family: 'Poppins', sans-serif;
     background-color: #060f8a;
     color: #fff;
@@ -154,22 +101,21 @@ input[type="submit"]:hover {
     transition: background-color 0.3s ease;
     align-items: center;
     text-align: center;
-    margin-left: 170px;
-    margin-top: -58px;
+    margin-left: 260px;
+    margin-top: 15px;
     display: inline-block;
     font-weight: 500;
 }
 
-input[type="submit"]:hover {
+.signup input[type="submit"]:hover {
     background-color: #040a55;
 }
-
 
 .image img {
     max-width: 40%;
     height: auto;
     align-items: center;
     float: right;
-    margin-top: -43%;
+    margin-top: -32%;
     margin-right: 6.5%;
 }

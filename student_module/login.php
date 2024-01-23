@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/loginn.css">
     <title>Login</title>
 </head>
 <body>
@@ -64,8 +64,20 @@ if (isset($loginError)) {
     <input type="password" name="password" required><br>
     </div>
 
-    <input type="submit" value="Login">
+    <div class="button"> 
+    <input type="submit" value="LOGIN">
+    </div>
+
+    <div class="signup">
+    <input type="submit" value="SIGN UP">
+    </div>
+
 </form>
+
+<div class="image">
+        <img src="../images/logo.png" alt="img">
+    </div>
+</div>
 
 </body>
 </html>
