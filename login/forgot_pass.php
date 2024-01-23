@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../css/forgot.css">
+
 <?php
 require('../database/db.php');
 session_start();
@@ -53,11 +55,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h2>Forgot Password</h2>
+<div class="box-container">
+    <header>FORGOT PASSWORD</header>
 
 <form action="forgot_pass.php" method="post">
-    <label for="idNum">ID Number</label>
+
+
+    <div class="idnum"> 
+    <label for="idNum">ID Number: </label>
     <input type="text" id="idNum" name="idNum" required><br><br>
+    </div>
+    
+    <div class="button"> 
     <input type="submit" value="Submit">
+    </div>
+    
+    <div class="back">
     <button class="back" type="button" onclick="window.location.href='../index.php'">Back</button>
+    </div>
+
 </form>
+</div>
