@@ -1,5 +1,5 @@
 <script src="../javascript/signup.js" defer></script>
-<link rel="stylesheet" href="../student_module/signup.css">
+<link rel="stylesheet" href="../css/signup.css">
 
 <?php
 if (!empty($errors)) {
