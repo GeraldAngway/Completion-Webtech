@@ -1,5 +1,5 @@
 <script src="javascript/login.js" ></script>
-<link rel="stylesheet" href="css/loginn.css">
+<link rel="stylesheet" href="../css/loginn.css">
 
 <?php
     session_start();

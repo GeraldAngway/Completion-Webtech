@@ -1,7 +1,5 @@
 <script src="../javascript/change.js" defer></script>
-<link rel="stylesheet" href="../css/change.css">
-
-<h2>Change Password</h2>
+<link rel="stylesheet" href="../css/pass.css">
 
 <?php
 // require('../login/require_session.php');
@@ -41,11 +39,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<div class="box-container">
+    <header>CHANGE PASSWORD</header>
+
 <form action="change_pass.php" method="post">
+
+    <div class="new"> 
     <label for="new_password">New Password:</label>
     <input type="password" id="new_password" name="new_password" required>
+    </div>
+    
+    <div class="confirm"> 
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" id="confirm_password" name="confirm_password" required>
-    <input type="checkbox" onclick="toggleChangePassword()"> Show Password<br><br>
+    </div>
+    
+    <div class="check"> 
+    <input type="checkbox" onclick="togglePassword()"> 
+    <span>Show Password</span><br><br>
+    </div>
+
+    <div class="button"> 
     <input type="submit" value="Change Password">
+    </div>
+
 </form>
+</div>
