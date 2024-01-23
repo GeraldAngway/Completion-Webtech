@@ -110,11 +110,10 @@ header {
     transition: background-color 0.3s ease;
     align-items: center;
     text-align: center;
-    margin-left: 295px;
-    margin-top: 15px;
+    margin-left: 290px;
+    margin-top: 45px;
     display: inline-block;
     font-weight: 500;
-   
 }
 
 .signup input[type="submit"]:hover {
@@ -133,31 +132,20 @@ button {
     transition: background-color 0.3s ease;
     align-items: center;
     text-align: center;
-    margin-left: 180px;
-    margin-top: -58px;
+    margin-left: 170px;
+    margin-top: -76px;
     display: inline-block;
     font-weight: 500;
 }
 
 a {
     text-decoration: none;
-    align-items: center;
-    text-align: center;
-    margin-left: 250px;
-    color: #060f8a;
-    font-size: 15px;
-
 }
-
-a:hover {
-    font-weight: 600;
-}
-
 .image img {
     max-width: 40%;
     height: auto;
     align-items: center;
     float: right;
-    margin-top: -38.5%;
+    margin-top: -32%;
     margin-right: 6.5%;
 }

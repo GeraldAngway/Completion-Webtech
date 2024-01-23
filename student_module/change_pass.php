@@ -1,4 +1,5 @@
 <script src="../javascript/change.js" defer></script>
+<link rel="stylesheet" href="../css/change.css">
 
 <h2>Change Password</h2>
 
