@@ -62,7 +62,7 @@ if (!empty($errors)) {
     </div>
 
     <div class="back">
-    <input type="submit" value="LOG IN" href="login.php">
+    <input type="submit" value="BACK" href="../index.php">
     </div>
 
 </form>

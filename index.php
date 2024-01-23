@@ -12,7 +12,7 @@
 <div class="box-container">
     <img src="images/logo.png" alt="top-logo">
     <header>LOG IN</header>
-<form action="login/login.php" method="post">
+<form action="otherpages/login.php" method="post">
 
     <div class="idnum"> 
     <label form="idNum">ID Number:</label>
@@ -37,7 +37,7 @@
     <button class="signup_button" type="button" onclick="window.location.href='student-module/signup_form.php'">Sign-Up</button>
     <br><br>
 
-    <a href="login/forgot_pass.php">Forgot Password?</a>
+    <a href="otherpages/forgot_pass.php">Forgot Password?</a>
 
 </form>
 
