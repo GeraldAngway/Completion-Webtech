@@ -9,11 +9,8 @@ if (!empty($errors)) {
     }
     echo '</div>';
 }
-
-if (!empty($successMessage)) {
-    echo '<div class="success-message" style="color: green;">' . $successMessage . '</div>';
-}
 ?>
+
 <div class="box-container">
     <img src="../images/logo.png" alt="top-logo">
     <header>SIGN UP</header>
@@ -24,7 +21,7 @@ if (!empty($successMessage)) {
     <label for="idNumber">ID Number: </label>
     <input type="text" id="idNumber" name="idNumber" value="<?php echo isset($_POST['idNumber']) ? htmlspecialchars($_POST['idNumber']) : ''; ?>" required>
     </div>
-    
+
     <div class="fn"> 
     <label for="fName">First Name: </label>
     <input type="text" id="fName" name="fName" value="<?php echo isset($_POST['fName']) ? htmlspecialchars($_POST['fName']) : ''; ?>" required>
@@ -34,9 +31,9 @@ if (!empty($successMessage)) {
     <label for="lName">Last Name: </label>
     <input type="text" id="lName" name="lName" value="<?php echo isset($_POST['lName']) ? htmlspecialchars($_POST['lName']) : ''; ?>" required>
     </div>
-
+    
     <div class="prog"> 
-    <label for="program">Choose a Program:  </label>
+    <label for="program">Choose a Program: </label>
     <select id="program" name="program" required>
         <option value=""></option>
         <option value="bscs" <?php echo (isset($_POST['program']) && $_POST['program'] == 'bscs') ? 'selected' : ''; ?>>BSCS</option>
@@ -46,23 +43,26 @@ if (!empty($successMessage)) {
     </div>
     
     <div class="ps"> 
-    <label for="password">Password: </label>
-    <input type="password" id="password" name="password" required>
+    <label for="password">Password: </label> 
+    <input type="password" id="password" name="password" value="<?php echo isset($_POST['password']) ? htmlspecialchars($_POST['password']) : ''; ?>" required>
     </div>
-
+    
     <div class="pps"> 
     <label for="cpassword">Confirm Password: </label>
-    <input type="password" id="cpassword" name="cpassword" required>
-    
+    <input type="password" id="cpassword" name="cpassword" value="<?php echo isset($_POST['cpassword']) ? htmlspecialchars($_POST['cpassword']) : ''; ?>" required>
     </div>
-
+    
     <div class="check"> 
     <input type="checkbox" onclick="togglePassword()"> 
-    <span>Show Password</span><br><br>
+    <span>Show Password: </span><br><br>
     </div>
 
     <div class="button"> 
     <input type="submit" value="SIGN UP">
+    </div>
+
+    <div class="back">
+    <input type="login" value="LOG IN">
     </div>
 
 </form>
@@ -70,11 +70,5 @@ if (!empty($successMessage)) {
 <div class="image">
         <img src="../images/logo.png" alt="img">
     </div>
-
 </div>
 
-<?php
-if (!empty($successMessage)) {
-    echo '<script src="../javascript/signup.js"></script>';
-}
-?>
