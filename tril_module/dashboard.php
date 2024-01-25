@@ -108,10 +108,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Tril_dashboard.css">
     <title>Dashboard</title>
 </head>
 <body>
-
+<div class="container">
+    <h1>TRIL Module</h1>
     <!-- Sorting, and Filtering -->
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="searchIDNumber">ID Number:</label>
@@ -158,5 +160,6 @@
 
     <!-- Display current time -->
     <p>Current Time: <?php echo date("H:i:s"); ?></p>
+</div>
 </body>
 </html>

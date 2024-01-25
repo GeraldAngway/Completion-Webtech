@@ -50,23 +50,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/tril_login.css">
     <title>TRIL Login</title>
 </head>
 <body>
 
-    <h2>Login</h2>
-
+<div class="container">
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
     <?php
     if (isset($loginError)) {
         echo '<p style="color: red;">' . $loginError . '</p>';
     }
     ?>
 
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        Username: <input type="text" name="idNumber" required><br>
-        Password: <input type="password" name="password" required><br>
-        <input type="submit" name="login" value="Login">
-    </form>
-
+    
+    
+        
+        <div class="form">
+            <h2>Login</h2>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                Username: <input type="text" name="idNumber" required><br>
+                Password: <input type="password" name="password" required><br>
+                <input type="submit" name="login" value="Login">
+            </form>
+        </div>
+    </div>
+    </div>
 </body>
 </html>

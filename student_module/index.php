@@ -71,6 +71,8 @@ $conn->close();
 ?>
 
 <!-- Utilization Log Form -->
+
+<link rel="stylesheet" href="css/student.css">
 <h3>Log Utilization</h3>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     Date: <input type="date" name="utilization_date" required><br>

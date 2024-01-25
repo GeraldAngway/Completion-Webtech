@@ -1,5 +1,5 @@
 <script src="javascript/login.js" ></script>
-<link rel="stylesheet" href="../css/loginn.css">
+<link rel="stylesheet" href="css/loginn.css">
 
 <?php
     session_start();
@@ -34,7 +34,7 @@
     </div>
     
 
-    <button class="signup_button" type="button" onclick="window.location.href='student-module/signup_form.php'">Sign-Up</button>
+    <button class="signup_button" type="button" onclick="window.location.href='student_module/signup_form.php'">Sign-Up</button>
     <br><br>
 
     <a href="otherpages/forgot_pass.php">Forgot Password?</a>
