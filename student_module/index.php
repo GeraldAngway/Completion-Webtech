@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 // Log utilization
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
     $selectedDate = $_POST["utilization_date"];
-    $currentTime = date("Y-m-d"); // Current date
+    $currentTime = date("Y-m-d");
 
     if ($selectedDate < $currentTime) {
         echo "Invalid date. Please select a date equal to or after today.";
