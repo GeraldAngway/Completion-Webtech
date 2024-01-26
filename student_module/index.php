@@ -72,8 +72,8 @@ $conn->close();
 
 <!-- Utilization Log Form -->
 
-<link rel="stylesheet" href="css/student.css">
-<h3>Log Utilization</h3>
+<link rel="stylesheet" href="styles/dashboardcss.css">
+<div class="container"><h3>Log Utilization</h3>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     Date: <input type="date" name="utilization_date" required><br>
     Time: <input type="time" name="utilization_time" required><br>
@@ -81,3 +81,4 @@ $conn->close();
     Purpose: <input type="text" name="utilization_purpose" required><br>
     <input type="submit" name="log_utilization" value="Log Utilization">
 </form>
+</div>
