@@ -72,13 +72,48 @@ $conn->close();
 
 <!-- Utilization Log Form -->
 
-<link rel="stylesheet" href="styles/dashboardcss.css">
-<div class="container"><h3>Log Utilization</h3>
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    Date: <input type="date" name="utilization_date" required><br>
-    Time: <input type="time" name="utilization_time" required><br>
-    Room #: <input type="text" name="utilization_room" required><br>
-    Purpose: <input type="text" name="utilization_purpose" required><br>
-    <input type="submit" name="log_utilization" value="Log Utilization">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="styles/dashboardcss.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="log-utilization">
+        <h3>Log Utilization</h3>
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            Date: <input type="date" name="utilization_date" required><br>
+            Time: <input type="time" name="utilization_time" required><br>
+            Room #: <input type="text" name="utilization_room" required><br>
+            Purpose: <input type="text" name="utilization_purpose" required><br>
+            <input type="submit" name="log_utilization" value="Log Utilization">
+        </form>
+    </div>
+
+    <div class="utilization-history">
+        <h2>Your Utilization History:</h2>
+        <table border="1">
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Room</th>
+                <th>Purpose</th>
+            </tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['Date']; ?></td>
+                    <td><?php echo $row['Time']; ?></td>
+                    <td><?php echo $row['Room']; ?></td>
+                    <td><?php echo $row['Purpose']; ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    </div>
 </div>
+
+</body>
+</html>
