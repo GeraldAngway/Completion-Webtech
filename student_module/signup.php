@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include '../database/db.php';
 
 $errors = array();
@@ -46,41 +48,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $role ='Student';
-
+    
+        $role = 'Student';
+    
         $sql = "INSERT INTO users (IDNum, FirstName, LastName, Program, Role) VALUES (?, ?, ?, ?, ?)";
-
+    
         $stmt = $db->prepare($sql);
         $stmt->bind_param("sssss", $idNumber, $fName, $lName, $program, $role);
-
+    
         if ($stmt->execute()) {
-
             $userID = $stmt->insert_id;
             $passwordStatus = 0;
             $accountStatus = 'Active';
             $userStatus = 'Offline';
-
+    
             $sqlAccounts = "INSERT INTO accounts (UserID, Password, Password_Status, Account_Status, User_Status) VALUES (?, ?, ?, ?, ?)";
             $stmtAccounts = $db->prepare($sqlAccounts);
             $stmtAccounts->bind_param("isiss", $userID, $hashedPassword, $passwordStatus, $accountStatus, $userStatus);
-
+    
             if ($stmtAccounts->execute()) {
-                echo "<script>alert('Registration Successful');
-                        window.location.href = '../index.php';
-                     </script>";
+                // Fix the session variable here
+                $_SESSION['idNum'] = $idNumber;  // Change from 'UserID' to 'idNum'
+                header("Location: student.php"); // Redirect to student.php
+                exit();
             } else {
                 $errors[] = $stmtAccounts->error;
             }
-
+    
             $stmtAccounts->close();
         } else {
             $errors[] = $stmt->error;
         }
-
+    
         $stmt->close();
         $db->close();
     }
 }
+
+// Include signup_form.php only if there are errors or form has not been submitted
 include 'signup_form.php';
 ?>
