@@ -2,47 +2,48 @@
 require('../database/db.php');
 session_start();
 
-$idnumber = $_POST['idNum'];
-$password = $_POST['password'];
+// Check if the user is already logged in
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
+    // Redirect to the appropriate page based on the user's role
+    if ($_SESSION['role'] == 'Student') {
+        header("location: ../student_module/student.php");
+        exit();
+    } elseif ($_SESSION['role'] == 'TRIL') {
+        header("location: ../tril_module/tril.php");
+        exit();
+    } else {
+        header("location: ../admin_module/admin.php");
+        exit();
+    }
+}
 
-$sql = "SELECT a.password, u.role, u.UserID, u.IDNum FROM accounts a
-        JOIN users u ON a.UserID = u.UserID
-        WHERE u.IDNum = ?";
-$stmt = $db->prepare($sql);
-$stmt->bind_param("s", $idnumber);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $idnumber = $_POST['idNum'];
+    $password = $_POST['password'];
 
-$stmt->execute();
+    $sql = "SELECT a.password, u.role, u.UserID FROM accounts a
+            JOIN users u ON a.UserID = u.UserID
+            WHERE u.IDNum = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param("s", $idnumber);
 
-$result = $stmt->get_result();
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
-            if (isset($_SESSION['logged_users']) && in_array($idnumber, $_SESSION['logged_users'])) {
-                $_SESSION['error'] = 'User already logged in';
-                header('Location: ../index.php');
-                exit();
-            }
-
             $_SESSION['loggedin'] = true;
-            $_SESSION['idNum'] = $row['IDNum'];
+            $_SESSION['idNum'] = $idnumber;
             $_SESSION['role'] = $row['role'];
-            $_SESSION['logged_users'][] = $row['IDNum'];
+            $_SESSION['UserID'] = $row['UserID'];
 
-            // Adjust your logic to handle multiple rows
-            if ($_SESSION['role'] == 'Student' || $_SESSION['role'] == 'student') {
-                if ($password == $idnumber) {
-                    header("location: change_pass.php");
-                } else {
-                    header("location: ../student_module/student.php");
-                }
+            // Redirect to the appropriate page based on the user's role
+            if ($_SESSION['role'] == 'Student') {
+                header("location: ../student_module/student.php");
                 exit();
             } elseif ($_SESSION['role'] == 'TRIL') {
-                if ($password == $idnumber) {
-                    header("location: change_pass.php");
-                } else {
-                    header("location: ../tril_module/tril.php");
-                }
+                header("location: ../tril_module/tril.php");
                 exit();
             } else {
                 header("location: ../admin_module/admin.php");
@@ -50,14 +51,10 @@ if ($result->num_rows > 0) {
             }
         }
     }
-    $_SESSION['error'] = 'Invalid password';
-    header('Location: ../index.php');
-    exit();
-} else {
-    $_SESSION['error'] = 'Account not found';
-    header('Location: ../index.php');
-    exit();
+
+    $_SESSION['error'] = 'Invalid ID number or password';
 }
-$stmt->close();
-$db->close();
+
+header('Location: ../index.php');
+exit();
 ?>
