@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
     $currentTime = date("Y-m-d");
 
     if ($selectedDate < $currentTime) {
-        echo "Invalid date. Please select a date equal to or after today.";
+        $errorMsg = "Invalid date. Please select a date equal to or after today.";
     } else {
         $date = $selectedDate;
         $time = $_POST["utilization_time"];
@@ -108,6 +108,9 @@ $conn->close();
     </div>
 
     <div class="log-utilization">
+    <?php if (!empty($errorMsg)) : ?>
+        <h4 style="color: red;"><?php echo $errorMsg; ?></h4>
+    <?php endif; ?>
         <h3>Log Utilization</h3>
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             Date: <input type="date" name="utilization_date" required><br>
