@@ -1,6 +1,8 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #e0e0d2;
+    background-image: url("../../images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
     margin: 0;
     padding: 0;
     display: flex;
@@ -37,25 +39,25 @@ h3 {
     padding: 10px;
 }
 
-.log-utilization,
-.utilization-history {
+.log-utilization{
     width: 100%;
     box-sizing: border-box;
 }
 
-.log-utilization form,
-.utilization-history table {
-    width: 100%;
+.log-utilization form{
+    width: 90%;
 }
 
 form {
     display: flex;
     flex-direction: column;
+
 }
 
 input[type="date"],
 input[type="time"],
-input[type="text"] {
+input[type="text"],
+select {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
@@ -77,25 +79,42 @@ input[type="submit"]:hover {
     background-color: #19547c;
 }
 
-.utilization-history table {
-    margin-top: 20px;
-}
 
 .logout {
     position: absolute;
     bottom: 0;
     right: 0;
-    margin: 20px;
+    margin-right: 10px;
 }
 
-@media only screen and (min-width: 600px) {
-    .container {
-        flex-direction: column;
-        align-items: stretch;
-    }
+.utilization-history {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: auto; 
+    max-height: 350px;  
+    margin-top: 25px;
+}
 
-    .log-utilization,
-    .utilization-history {
-        width: 50%;
-    }
+.utilization-history table {
+    width: 100%;
+}
+
+.utilization-history th {
+    background-color: #1ca4ff; /* Add a background color for the header */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #333;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
 }

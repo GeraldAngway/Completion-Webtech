@@ -92,14 +92,19 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title</title>
+    <title>Student Module</title>
     <link rel="stylesheet" href="css/student.css">
 </head>
 <body>
 
 <div class="container">
-    <div class="user-info">
-        <p>Welcome, <?php echo $userFirstName . ' ' . $userLastName; ?></p>
+<div class="user-info">
+    <p>Welcome, <strong><?php echo $userFirstName; ?></strong> <strong><?php echo $userLastName; ?></strong></p>
+</div>
+    <div class="logout">
+    <form method="post" action="../otherpages/logout.php">
+        <p><input type="submit" name="logout" value="Logout"></p>
+    </form>
     </div>
 
     <div class="log-utilization">
@@ -120,7 +125,7 @@ $conn->close();
     </div>
 
     <div class="utilization-history">
-        <h2>Your Utilization History:</h2>
+        <h3>Your Utilization History:</h3>
         <table border="1">
             <tr>
                 <th>Date</th>
@@ -138,11 +143,7 @@ $conn->close();
             <?php endforeach; ?>
         </table>
     </div>
-    <div class="logout">
-    <form method="post" action="../otherpages/logout.php">
-        <p><input type="submit" name="logout" value="Logout"></p>
-    </form>
-</div>
+    
 </div>
 
 
