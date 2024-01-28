@@ -12,7 +12,10 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
+
+    // Get the current date
+    $currentDate = date("Y-m-d");
+
     // Initialize variables for search
     $searchIDNumber = "";
     $searchStudentName = "";
@@ -30,17 +33,27 @@
         $searchProgram = $_POST["searchProgram"];
         $sortField = $_POST['sortField'];
         $sortOrder = $_POST['sortOrder'];
+
+        // Check if "Clear Fields" button is clicked
+        if (isset($_POST['clearFields'])) {
+            // Reset search fields to initial values
+            $searchIDNumber = "";
+            $searchStudentName = "";
+            $searchPurpose = "";
+            $searchProgram = "";
+        }
     }
 
     // SQL query with search conditions, sorting, and filtering
     $sql = "SELECT users.FirstName, users.LastName, users.IDNum, users.Program, utilization.Purpose, utilization.Room, utilization.Date, utilization.Time
-            FROM utilization
-            INNER JOIN users ON utilization.UserID = users.UserID
-            WHERE users.IDNum LIKE '%$searchIDNumber%'
-            AND CONCAT(users.FirstName, ' ', users.LastName) LIKE '%$searchStudentName%'
-            AND utilization.Purpose LIKE '%$searchPurpose%'
-            AND users.Program LIKE '%$searchProgram%'
-            ORDER BY $sortField $sortOrder";
+        FROM utilization
+        INNER JOIN users ON utilization.UserID = users.UserID
+        WHERE users.IDNum LIKE '%$searchIDNumber%'
+        AND CONCAT(users.FirstName, ' ', users.LastName) LIKE '%$searchStudentName%'
+        AND utilization.Purpose LIKE '%$searchPurpose%'
+        AND users.Program LIKE '%$searchProgram%'
+        AND utilization.Date = '$currentDate'  -- Include this condition
+        ORDER BY $sortField $sortOrder";
 
     // Perform the query
     $result = $conn->query($sql);
@@ -70,19 +83,21 @@
                     <td>{$row['Time']}</td>
                 </tr>";
         }
-
         echo "</table>";
     } else {
-        echo "No utilization records found.";
+        // Display more specific message based on search criteria
+        if (!empty($searchIDNumber)) {
+            echo "No utilization records found for ID Number: $searchIDNumber.";
+        } elseif (!empty($searchStudentName)) {
+            echo "No utilization records found for Student Name: $searchStudentName.";
+        } elseif (!empty($searchPurpose)) {
+            echo "No utilization records found for Purpose: $searchPurpose.";
+        } elseif (!empty($searchProgram)) {
+            echo "No utilization records found for Program: $searchProgram.";
+        } else {
+            echo "No utilization records found.";
+        }
     }
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Get the current date
-    $currentDate = date("Y-m-d");
 
     // SQL query to count the number of users on the current date
     $countUsersSQL = "SELECT COUNT(DISTINCT UserID) as userCount FROM utilization WHERE Date = '$currentDate'";
@@ -99,10 +114,10 @@
         echo "Error counting users.";
     }
 
-
     // Close the connection
     $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -127,9 +142,7 @@
 
         <label for="searchProgram">Program:</label>
         <input type="text" name="searchProgram" value="<?php echo $searchProgram; ?>">
-    </form>
 
-    <form>
         <label for="sortField">Sort By:</label>
         <select name="sortField">
             <option value="users.FirstName" <?php echo ($sortField == 'users.FirstName') ? 'selected' : ''; ?>>Name</option>
@@ -145,15 +158,15 @@
             <option value="ASC" <?php echo ($sortOrder == 'ASC') ? 'selected' : ''; ?>>Ascending</option>
             <option value="DESC" <?php echo ($sortOrder == 'DESC') ? 'selected' : ''; ?>>Descending</option>
         </select>
-
         <input type="submit" value="Search">
+        <hr>
+        <input type="submit" name="clearFields" value="Clear Fields">
     </form>
-
+    <hr>
     <!-- Logout form -->
     <form method="post" action="logout.php">
         <input type="submit" name="logout" value="Logout">
     </form>
-    <br>
     <hr>
     <!-- Display current date -->
     <p>Current Date: <?php echo date("Y-m-d"); ?></p>
