@@ -67,9 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtAccounts->bind_param("isiss", $userID, $hashedPassword, $passwordStatus, $accountStatus, $userStatus);
     
             if ($stmtAccounts->execute()) {
-                // Fix the session variable here
-                $_SESSION['idNum'] = $idNumber;  // Change from 'UserID' to 'idNum'
-                header("Location: student.php"); // Redirect to student.php
+                
+                $_SESSION['idNum'] = $idNumber;  
+                header("Location: ../otherpages/login.php"); 
                 exit();
             } else {
                 $errors[] = $stmtAccounts->error;
