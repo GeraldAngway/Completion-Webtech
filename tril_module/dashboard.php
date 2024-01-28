@@ -1,5 +1,15 @@
 <?php
-    // Database connection details
+    // Start or resume the session
+    session_start();
+    
+    // Check if the user is not logged in
+    if (!isset($_SESSION['loggedin'])) {
+        // Redirect to the login page if not logged in
+        header("Location: login.php");
+        exit();
+    }
+
+    // Database connection 
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -24,7 +34,7 @@
     $sortField = isset($_POST['sortField']) ? $_POST['sortField'] : 'utilization.Date';
     $sortOrder = isset($_POST['sortOrder']) ? $_POST['sortOrder'] : 'DESC';
 
-    // Check if the form is submitted
+    //if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Get the search values from the form
         $searchIDNumber = $_POST["searchIDNumber"];
@@ -34,7 +44,6 @@
         $sortField = $_POST['sortField'];
         $sortOrder = $_POST['sortOrder'];
 
-        // Check if "Clear Fields" button is clicked
         if (isset($_POST['clearFields'])) {
             // Reset search fields to initial values
             $searchIDNumber = "";
@@ -44,7 +53,7 @@
         }
     }
 
-    // SQL query with search conditions, sorting, and filtering
+    //search conditions, sorting, and filtering
     $sql = "SELECT users.FirstName, users.LastName, users.IDNum, users.Program, utilization.Purpose, utilization.Room, utilization.Date, utilization.Time
         FROM utilization
         INNER JOIN users ON utilization.UserID = users.UserID
@@ -52,7 +61,7 @@
         AND CONCAT(users.FirstName, ' ', users.LastName) LIKE '%$searchStudentName%'
         AND utilization.Purpose LIKE '%$searchPurpose%'
         AND users.Program LIKE '%$searchProgram%'
-        AND utilization.Date = '$currentDate'  -- Include this condition
+        AND utilization.Date = '$currentDate' 
         ORDER BY $sortField $sortOrder";
 
     // Perform the query
@@ -99,7 +108,7 @@
     //     }
     // }
 
-    // SQL query to count the number of users on the current date
+    //number of users on the current date
     $countUsersSQL = "SELECT COUNT(DISTINCT UserID) as userCount FROM utilization WHERE Date = '$currentDate'";
     $userCountResult = $conn->query($countUsersSQL);
 
@@ -107,8 +116,6 @@
     if ($userCountResult->num_rows > 0) {
         $row = $userCountResult->fetch_assoc();
         $userCount = $row['userCount'];
-
-        // Output the total number of users
         $cnt = "<p>Total Users Today: $userCount</p>";
     } else {
         echo "Error counting users.";
@@ -141,7 +148,11 @@
         <input type="text" name="searchPurpose" value="<?php echo $searchPurpose; ?>">
 
         <label for="searchProgram">Program:</label>
-        <input type="text" name="searchProgram" value="<?php echo $searchProgram; ?>">
+        <select name="searchProgram">
+            <option value="BSIT" <?php echo ($searchProgram == 'BSIT') ? 'selected' : ''; ?>>BSIT</option>
+            <option value="BSCS" <?php echo ($searchProgram == 'BSCS') ? 'selected' : ''; ?>>BSCS</option>
+            <option value="BMMA" <?php echo ($searchProgram == 'BMMA') ? 'selected' : ''; ?>>BMMA</option>
+        </select>
 
         <label for="sortField">Sort By:</label>
         <select name="sortField">
@@ -192,7 +203,6 @@
         }
         echo "</table>";
     } else {
-        // Display more specific message based on search criteria
         if (!empty($searchIDNumber)) {
             echo "No utilization records found for ID Number: $searchIDNumber.";
         } elseif (!empty($searchStudentName)) {
