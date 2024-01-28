@@ -44,37 +44,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
     }
 }
 
-// History of utilization
+// Fetch user's name
 $userID = isset($_SESSION['UserID']) ? $_SESSION['UserID'] : null;
+$userFirstName = "";
+$userLastName = "";
 
+if ($userID !== null) {
+    $sqlUser = "SELECT FirstName, LastName FROM users WHERE UserID = ?";
+    $stmtUser = $conn->prepare($sqlUser);
+    $stmtUser->bind_param("i", $userID);
+    $stmtUser->execute();
+    $resultUser = $stmtUser->get_result();
+
+    if ($rowUser = $resultUser->fetch_assoc()) {
+        $userFirstName = $rowUser['FirstName'];
+        $userLastName = $rowUser['LastName'];
+    }
+
+    $stmtUser->close();
+}
+
+// History of utilization
 if ($userID === null) {
     // Handle the case where UserID is not set, such as redirecting the user to the login page.
     header("Location: ../otherpages/login.php");
     exit();
 }
+
 $sql = "SELECT * FROM utilization WHERE UserID = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userID);
 $stmt->execute();
 $result = $stmt->get_result();
 
-echo "<h2>Your Utilization History:</h2>";
-echo "<table border='1'><tr><th>Date</th><th>Time</th><th>Room</th><th>Purpose</th></tr>";
-
+// Fetch all rows and store them in an array
+$utilizationRows = [];
 while ($row = $result->fetch_assoc()) {
-    echo "<tr><td>{$row['Date']}</td><td>{$row['Time']}</td><td>{$row['Room']}</td><td>{$row['Purpose']}</td></tr>";
+    $utilizationRows[] = $row;
 }
-
-echo "</table>";
 
 $stmt->close();
 $conn->close();
 ?>
-
-<form method="post" action="../otherpages/logout.php">
-    <input type="submit" name="logout" value="Logout">
-</form>
-<!-- Utilization Log Form -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,11 +93,15 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Page Title</title>
-    <link rel="stylesheet" href="styles/dashboardcss.css">
+    <link rel="stylesheet" href="css/student.css">
 </head>
 <body>
 
 <div class="container">
+    <div class="user-info">
+        <p>Welcome, <?php echo $userFirstName . ' ' . $userLastName; ?></p>
+    </div>
+
     <div class="log-utilization">
         <h3>Log Utilization</h3>
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -107,17 +122,24 @@ $conn->close();
                 <th>Room</th>
                 <th>Purpose</th>
             </tr>
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php foreach ($utilizationRows as $row): ?>
                 <tr>
                     <td><?php echo $row['Date']; ?></td>
                     <td><?php echo $row['Time']; ?></td>
                     <td><?php echo $row['Room']; ?></td>
                     <td><?php echo $row['Purpose']; ?></td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </table>
     </div>
+    <div class="logout">
+    <form method="post" action="../otherpages/logout.php">
+        <p><input type="submit" name="logout" value="Logout"></p>
+    </form>
 </div>
+</div>
+
+
 
 </body>
 </html>
