@@ -58,46 +58,46 @@
     // Perform the query
     $result = $conn->query($sql);
 
-    // Check if there are results
-    if ($result->num_rows > 0) {
-        echo "<table border='1'>
-                <tr>
-                    <th>Name</th>
-                    <th>ID</th>
-                    <th>Program</th>
-                    <th>Purpose</th>
-                    <th>Room</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>";
+    // // Check if there are results
+    // if ($result->num_rows > 0) {
+    //     echo "<table border='1'>
+    //             <tr>
+    //                 <th>Name</th>
+    //                 <th>ID</th>
+    //                 <th>Program</th>
+    //                 <th>Purpose</th>
+    //                 <th>Room</th>
+    //                 <th>Date</th>
+    //                 <th>Time</th>
+    //             </tr>";
 
-        // Output data for each row
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>
-                    <td>{$row['FirstName']} {$row['LastName']}</td>
-                    <td>{$row['IDNum']}</td>
-                    <td>{$row['Program']}</td>
-                    <td>{$row['Purpose']}</td>
-                    <td>{$row['Room']}</td>
-                    <td>{$row['Date']}</td>
-                    <td>{$row['Time']}</td>
-                </tr>";
-        }
-        echo "</table>";
-    } else {
-        // Display more specific message based on search criteria
-        if (!empty($searchIDNumber)) {
-            echo "No utilization records found for ID Number: $searchIDNumber.";
-        } elseif (!empty($searchStudentName)) {
-            echo "No utilization records found for Student Name: $searchStudentName.";
-        } elseif (!empty($searchPurpose)) {
-            echo "No utilization records found for Purpose: $searchPurpose.";
-        } elseif (!empty($searchProgram)) {
-            echo "No utilization records found for Program: $searchProgram.";
-        } else {
-            echo "No utilization records found.";
-        }
-    }
+    //     // Output data for each row
+    //     while ($row = $result->fetch_assoc()) {
+    //         echo "<tr>
+    //                 <td>{$row['FirstName']} {$row['LastName']}</td>
+    //                 <td>{$row['IDNum']}</td>
+    //                 <td>{$row['Program']}</td>
+    //                 <td>{$row['Purpose']}</td>
+    //                 <td>{$row['Room']}</td>
+    //                 <td>{$row['Date']}</td>
+    //                 <td>{$row['Time']}</td>
+    //             </tr>";
+    //     }
+    //     echo "</table>";
+    // } else {
+    //     // Display more specific message based on search criteria
+    //     if (!empty($searchIDNumber)) {
+    //         echo "No utilization records found for ID Number: $searchIDNumber.";
+    //     } elseif (!empty($searchStudentName)) {
+    //         echo "No utilization records found for Student Name: $searchStudentName.";
+    //     } elseif (!empty($searchPurpose)) {
+    //         echo "No utilization records found for Purpose: $searchPurpose.";
+    //     } elseif (!empty($searchProgram)) {
+    //         echo "No utilization records found for Program: $searchProgram.";
+    //     } else {
+    //         echo "No utilization records found.";
+    //     }
+    // }
 
     // SQL query to count the number of users on the current date
     $countUsersSQL = "SELECT COUNT(DISTINCT UserID) as userCount FROM utilization WHERE Date = '$currentDate'";
@@ -109,7 +109,7 @@
         $userCount = $row['userCount'];
 
         // Output the total number of users
-        echo "<p>Total Users Today: $userCount</p>";
+        $cnt = "<p>Total Users Today: $userCount</p>";
     } else {
         echo "Error counting users.";
     }
@@ -162,6 +162,57 @@
         <hr>
         <input type="submit" name="clearFields" value="Clear Fields">
     </form>
+
+    <div class="logs">
+    <?php
+         // Check if there are results
+    if ($result->num_rows > 0) {
+        echo "<table border='1'>
+                <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Program</th>
+                    <th>Purpose</th>
+                    <th>Room</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>";
+
+        // Output data for each row
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>{$row['FirstName']} {$row['LastName']}</td>
+                    <td>{$row['IDNum']}</td>
+                    <td>{$row['Program']}</td>
+                    <td>{$row['Purpose']}</td>
+                    <td>{$row['Room']}</td>
+                    <td>{$row['Date']}</td>
+                    <td>{$row['Time']}</td>
+                </tr>";
+        }
+        echo "</table>";
+    } else {
+        // Display more specific message based on search criteria
+        if (!empty($searchIDNumber)) {
+            echo "No utilization records found for ID Number: $searchIDNumber.";
+        } elseif (!empty($searchStudentName)) {
+            echo "No utilization records found for Student Name: $searchStudentName.";
+        } elseif (!empty($searchPurpose)) {
+            echo "No utilization records found for Purpose: $searchPurpose.";
+        } elseif (!empty($searchProgram)) {
+            echo "No utilization records found for Program: $searchProgram.";
+        } else {
+            echo "No utilization records found.";
+        }
+    }
+    ?>
+    </div>
+
+    <?php if (!empty($cnt)) : ?>
+        <h5><?php echo $cnt; ?></h5>
+    <?php endif; ?>
+
+
     <hr>
     <!-- Logout form -->
     <form method="post" action="logout.php">

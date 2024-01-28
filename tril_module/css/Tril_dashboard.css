@@ -1,12 +1,16 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    background-image: url("../../images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 20px;
     background-color: #e0e0d2bb;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    
 }
 
 .container {
@@ -46,6 +50,7 @@ input[type="submit"] {
     color: white;
     border: none;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 input[type="submit"]:hover {
@@ -58,4 +63,37 @@ hr {
 
 p {
     margin: 10px 0;
+}
+
+.logs {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: auto; 
+    max-height: 350px;  
+    margin-top: 25px;
+}
+
+.logs table {
+    width: 100%;
+}
+
+.logs th {
+    background-color: #1ca4ff; /* Add a background color for the header */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #333;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
 }
