@@ -1,0 +1,278 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle, #060f8a, rgba(238, 238, 238, 0.85), #ffef11);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.box-container {
+    background-color: #fafafada;
+    width: 120%;
+    max-width: 1250px;
+    height: 83vh;
+    padding: 35px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(116, 116, 116, 0.678);
+}
+
+
+.logout, .reset, .users, .logs {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.logout a {
+    background-color: #eeeeee;
+    color: #060f8a;
+    text-decoration: none;
+    padding: 8px 13px 8px 13px;
+    border-radius: 8px;
+    font-weight: 450;
+}
+
+.logout a:hover {
+    background-color: #060f8a;
+    color: white;
+}
+
+.reset a {
+    background-color: #eeeeee;
+    color: #060f8a;
+    text-decoration: none;
+    padding: 8px 13px 8px 13px;
+    border-radius: 8px;
+    font-weight: 450;
+}
+
+.reset a:hover {
+    background-color: #060f8a;
+    color: white;
+}
+
+.users a {
+    background-color: #eeeeee;
+    color: #060f8a;
+    text-decoration: none;
+    padding: 8px 13px 8px 13px;
+    border-radius: 8px;
+    font-weight: 450;
+}
+
+.users a:hover {
+    background-color: #060f8a;
+    color: white;
+}
+
+.logs a {
+    background-color: #eeeeee;
+    color: #060f8a;
+    text-decoration: none;
+    padding: 8px 13px 8px 13px;
+    border-radius: 8px;
+    font-weight: 450;
+}
+
+.logs a:hover {
+    background-color: #060f8a;
+    color: white;
+}
+
+
+.table table {
+    border: 1px solid #060f8a;
+    border-radius: 8px;
+}
+
+.table th {
+    color: #060f8a;
+    font-weight: 450;
+    padding-right: 60px;
+}
+
+td {
+    color: #060f8a;
+    padding-left: 18px;
+    font-size: 14.4px;
+}
+
+button {
+    background-color: #060f8a;
+    border: none;
+    color: #eeeeee;
+    padding: 5px;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+}
+
+#activatePopup input[type="submit"] {
+    font-family: 'Poppins', sans-serif;
+    background-color: #060f8a;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-weight: 450;
+}
+
+#activatePopup input[type="submit"]:hover {
+    background-color: #040a55;
+}
+
+#activatePopup button {
+    font-family: 'Poppins', sans-serif;
+    background-color: #060f8a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-weight: 450;
+}
+
+#activatePopup button:hover {
+    background-color: #040a55;
+}
+
+#deactivatePopup input[type="submit"] {
+    font-family: 'Poppins', sans-serif;
+    background-color: #060f8a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-weight: 450;
+}
+
+#deactivatePopup input[type="submit"]:hover {
+    background-color: #040a55;
+}
+
+#deactivatePopup button {
+    font-family: 'Poppins', sans-serif;
+    background-color: #060f8a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-weight: 450;
+}
+
+#deactivatePopup button:hover {
+    background-color: #040a55;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eeeeee;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 4px;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.popup input,
+.popup select,
+.popup button {
+    margin-bottom: 10px;
+}
+
+.popup button {
+    margin-top: 10px;
+}
+
+#deletePopup input[type="password"] {
+    width: 80%;
+    height: 36%;
+
+}
+
+#deletePopup button {
+    font-family: 'Poppins', sans-serif;
+    background-color: #060f8a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-weight: 450;
+}
+
+#deletePopup button:hover {
+    background-color: #040a55;
+}
+
+
+#deletePopup input[type="submit"] {
+    font-family: 'Poppins', sans-serif;
+    background-color: #060f8a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    font-weight: 450;
+    margin-bottom: -20px;
+    margin-top: 10px;
+}
+
+#deletePopup input[type="submit"]:hover {
+    background-color: #040a55;
+}
+
+p {
+    color: #060f8a;
+}
+
+

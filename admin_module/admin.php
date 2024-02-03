@@ -1,12 +1,29 @@
+<link rel="stylesheet" href="../css/admin.css">
+
+<div class="box-container">
+
+<div class="logout">
 <a href='../otherpages/logout.php'>Logout</a>
+</div>
 
+<div class="reset">
 <a href='admin.php'>Reset Password Request/s</a>
-<a href=>Users</a>
-<a href=>User Logs</a>
+</div>
 
+<div class="users">
+<a href='admin_viewusers.php'>Users</a>
+</div>
+
+<div class="logs">
+<a href=#>User Logs</a>
+</div>
+
+    <br><br>
+<div class="table">
 <table>
     <thead>
         <tr>
+            <th>User ID</th>
             <th>ID Number</th>
             <th>Name</th>
             <th>Role</th>
@@ -14,53 +31,51 @@
         </tr>
     </thead>
 </table>
-
+</div>
 <?php
 require('../database/db.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset'])) {
-    $resetIDNum = $_POST['reset'];
+    $resetUserID = $_POST['resetUserID'];
+    $resetIDNum = $_POST['resetIDNum'];
+    $role = $_POST['role'];
 
-    $getIDSql = "SELECT u.IDNum FROM accounts a JOIN users u ON a.UserID = u.UserID WHERE u.IDNum = ?";
-
-    $stmt = $db->prepare($getIDSql);
-    $stmt->bind_param("s", $resetIDNum);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $userID = $row['IDNum'];
-        $resetPass = password_hash($userID, PASSWORD_DEFAULT);
-
-        $updateSql = "UPDATE accounts SET password = ?, Password_Status = 0 WHERE UserID = (
-            SELECT UserID FROM users WHERE IDNum = ?
-        )";
-
-        $stmt = $db->prepare($updateSql);
-        $stmt->bind_param("ss", $resetPass, $resetIDNum);
-        $stmt->execute();
+    if ($role == 'Student') {
+        $resetPass = password_hash($resetIDNum, PASSWORD_DEFAULT);
+    } elseif ($role == 'TRIL') {
+        $resetPass = password_hash('tril_cis', PASSWORD_DEFAULT);
     }
 
-    header("Location: admin.php");
-    exit();
+    $updateSql = "UPDATE accounts SET Password = '$resetPass', Password_Status = 0 WHERE UserID = '$resetUserID'";
+
+    if ($db->query($updateSql) === TRUE) {
+        echo "<script>
+                alert('Password reset successfully');
+                window.location.href = 'admin.php';
+                </script>";
+    } else {
+        echo "Error updating record: " . $db->error;
+    }
 }
 
-$sql = "SELECT u.IDNum, u.FirstName, u.LastName, u.Role FROM accounts a JOIN users u ON a.UserID = u.UserID WHERE a.Password_Status = 1";
+$sql = "SELECT u.UserID, u.IDNum, CONCAT(u.FirstName, ' ', u.LastName) AS FullName,
+        u.Role FROM users u INNER JOIN accounts a ON u.UserID = a.UserID
+        WHERE a.Password_Status = 1";
 $result = $db->query($sql);
 
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $name = $row['FirstName'] . ' ' . $row['LastName'];
         echo "<tr>
+                <td>{$row['UserID']}</td>
                 <td>{$row['IDNum']}</td>
-                <td>{$name}</td>
+                <td>{$row['FullName']}</td>
                 <td>{$row['Role']}</td>
                 <td>
-                    <form method='post'>
-                        <input type='hidden' name='reset' value='{$row['IDNum']}'>
-                        <input type='submit' value='Reset'>
+                    <form method='POST'>
+                        <input type='hidden' name='resetUserID' value='". $row["UserID"] ."'>
+                        <input type='hidden' name='resetIDNum' value='". $row["IDNum"] ."'>
+                        <input type='hidden' name='role' value='". $row["Role"] ."'>
+                        <input type='submit' name='reset' value='Reset'>
                     </form>
                 </td>
         </tr>";
@@ -70,3 +85,5 @@ if ($result && $result->num_rows > 0) {
 }
 $db->close();
 ?>
+
+</div>
