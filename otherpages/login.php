@@ -52,7 +52,7 @@ if ($result->num_rows > 0) {
                 if ($password == 'tril_cis') {
                     header("location: change_pass.php");
                 } else {
-                    header("location: ../tril_module/tril.php");
+                    header("location: ../tril_module/dashboard.php");
                 }
                 exit();
             } else {
