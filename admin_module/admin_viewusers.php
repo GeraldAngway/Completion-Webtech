@@ -17,7 +17,7 @@
 </div>
 
 <div class="logs">
-<a href=#>User Logs</a>
+<a href=admin_userlogs.php>User Logs</a>
 </div>
 
     <br><br>

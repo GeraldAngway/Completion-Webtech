@@ -15,7 +15,7 @@
 </div>
 
 <div class="logs">
-<a href=#>User Logs</a>
+<a href=admin_userlogs>User Logs</a>
 </div>
 
     <br><br>
