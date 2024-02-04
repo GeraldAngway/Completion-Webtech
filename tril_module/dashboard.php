@@ -5,7 +5,7 @@
     // Check if the user is not logged in
     if (!isset($_SESSION['loggedin'])) {
         // Redirect to the login page if not logged in
-        header("Location: login.php");
+        header("Location: ../index.php");
         exit();
     }
 
@@ -67,47 +67,7 @@
     // Perform the query
     $result = $conn->query($sql);
 
-    // // Check if there are results
-    // if ($result->num_rows > 0) {
-    //     echo "<table border='1'>
-    //             <tr>
-    //                 <th>Name</th>
-    //                 <th>ID</th>
-    //                 <th>Program</th>
-    //                 <th>Purpose</th>
-    //                 <th>Room</th>
-    //                 <th>Date</th>
-    //                 <th>Time</th>
-    //             </tr>";
-
-    //     // Output data for each row
-    //     while ($row = $result->fetch_assoc()) {
-    //         echo "<tr>
-    //                 <td>{$row['FirstName']} {$row['LastName']}</td>
-    //                 <td>{$row['IDNum']}</td>
-    //                 <td>{$row['Program']}</td>
-    //                 <td>{$row['Purpose']}</td>
-    //                 <td>{$row['Room']}</td>
-    //                 <td>{$row['Date']}</td>
-    //                 <td>{$row['Time']}</td>
-    //             </tr>";
-    //     }
-    //     echo "</table>";
-    // } else {
-    //     // Display more specific message based on search criteria
-    //     if (!empty($searchIDNumber)) {
-    //         echo "No utilization records found for ID Number: $searchIDNumber.";
-    //     } elseif (!empty($searchStudentName)) {
-    //         echo "No utilization records found for Student Name: $searchStudentName.";
-    //     } elseif (!empty($searchPurpose)) {
-    //         echo "No utilization records found for Purpose: $searchPurpose.";
-    //     } elseif (!empty($searchProgram)) {
-    //         echo "No utilization records found for Program: $searchProgram.";
-    //     } else {
-    //         echo "No utilization records found.";
-    //     }
-    // }
-
+   
     //number of users on the current date
     $countUsersSQL = "SELECT COUNT(DISTINCT UserID) as userCount FROM utilization WHERE Date = '$currentDate'";
     $userCountResult = $conn->query($countUsersSQL);
@@ -176,7 +136,7 @@
 
     <div class="logs">
     <?php
-         // Check if there are results
+    // Check if there are results
     if ($result->num_rows > 0) {
         echo "<table border='1'>
                 <tr>
