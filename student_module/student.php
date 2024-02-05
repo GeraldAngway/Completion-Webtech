@@ -1,6 +1,19 @@
 <?php
-require('../database/db.php');
-require('../otherpages/require_session.php');
+session_start();
+
+// Database connection details
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "management_system";
+
+// Create connection
+$db = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
 
 // Log utilization
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
@@ -14,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
         $time = $_POST["utilization_time"];
         $room = $_POST["utilization_room"];
         $purpose = $_POST["utilization_purpose"];
-        $userID = $_SESSION['UserID'];
+        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
 
         $sql = "INSERT INTO utilization (UserID, Date, Time, Room, Purpose) VALUES (?, ?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
@@ -34,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
 }
 
 // Fetch user's name
-$userID = isset($_SESSION['UserID']) ? $_SESSION['UserID'] : null;
+$userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
 $userFirstName = "";
 $userLastName = "";
 
@@ -110,7 +123,6 @@ $db->close();
                     <option value="Knowledge Center (D424)">Knowledge Center (D424)</option>
                     </select>
 
-
             Purpose: <input type="text" name="utilization_purpose" required><br>
             <input type="submit" name="log_utilization" value="Log Utilization">
         </form>
@@ -137,7 +149,6 @@ $db->close();
     </div>
     
 </div>
-
 
 </body>
 </html>
