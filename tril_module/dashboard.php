@@ -1,27 +1,6 @@
 <?php
-    // Start or resume the session
-    session_start();
-    
-    // Check if the user is not logged in
-    if (!isset($_SESSION['loggedin'])) {
-        // Redirect to the login page if not logged in
-        header("Location: ../index.php");
-        exit();
-    }
-
-    // Database connection 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "management_system";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    require('../database/db.php');
+    require('../otherpages/require_session.php');
 
     // Get the current date
     $currentDate = date("Y-m-d");
@@ -65,12 +44,12 @@
         ORDER BY $sortField $sortOrder";
 
     // Perform the query
-    $result = $conn->query($sql);
+    $result = $db->query($sql);
 
    
     //number of users on the current date
     $countUsersSQL = "SELECT COUNT(DISTINCT UserID) as userCount FROM utilization WHERE Date = '$currentDate'";
-    $userCountResult = $conn->query($countUsersSQL);
+    $userCountResult = $db->query($countUsersSQL);
 
     // Check if there are results
     if ($userCountResult->num_rows > 0) {
@@ -82,7 +61,7 @@
     }
 
     // Close the connection
-    $conn->close();
+    $db->close();
 ?>
 
 <!DOCTYPE html>

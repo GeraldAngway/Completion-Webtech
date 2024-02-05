@@ -1,17 +1,6 @@
 <?php
-session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "management_system";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require('../database/db.php');
+require('../otherpages/require_session.php');
 
 // Log utilization
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
@@ -28,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["log_utilization"])) {
         $userID = $_SESSION['UserID'];
 
         $sql = "INSERT INTO utilization (UserID, Date, Time, Room, Purpose) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $db->prepare($sql);
         $stmt->bind_param("issss", $userID, $date, $time, $room, $purpose);
 
         if ($stmt->execute()) {
@@ -51,7 +40,7 @@ $userLastName = "";
 
 if ($userID !== null) {
     $sqlUser = "SELECT FirstName, LastName FROM users WHERE UserID = ?";
-    $stmtUser = $conn->prepare($sqlUser);
+    $stmtUser = $db->prepare($sqlUser);
     $stmtUser->bind_param("i", $userID);
     $stmtUser->execute();
     $resultUser = $stmtUser->get_result();
@@ -67,12 +56,12 @@ if ($userID !== null) {
 // History of utilization
 if ($userID === null) {
     // Handle the case where UserID is not set, such as redirecting the user to the login page.
-    header("Location: ../otherpages/login.php");
+    header("Location: ../index.php");
     exit();
 }
 
 $sql = "SELECT * FROM utilization WHERE UserID = ?";
-$stmt = $conn->prepare($sql);
+$stmt = $db->prepare($sql);
 $stmt->bind_param("i", $userID);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -84,7 +73,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 $stmt->close();
-$conn->close();
+$db->close();
 ?>
 
 <!DOCTYPE html>
