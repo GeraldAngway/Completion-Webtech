@@ -61,11 +61,11 @@ if (!empty($errors)) {
     <input type="submit" value="SIGN UP">
     </div>
 
-    <div class="back">
-    <input type="submit" value="BACK" href="../index.php">
-    </div>
-
 </form>
+
+<div class="back">
+    <button class="back_button" type="button" onclick="window.location.href='../index.php'">Back</button>
+</div>
 
 <div class="image">
         <img src="../images/logo.png" alt="img">
