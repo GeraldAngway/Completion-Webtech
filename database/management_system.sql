@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 03, 2024 at 02:38 PM
+-- Generation Time: Feb 05, 2024 at 02:14 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 INSERT INTO `accounts` (`UserID`, `Password`, `Password_Status`, `Account_Status`, `User_Status`) VALUES
 (1, '$2y$10$0VBaBwUYQaQyRQJpLrtkyuHucAwOBh/OYmvKg3UfxTUisjvcpISy.', NULL, NULL, 'Offline'),
 (2, '$2y$10$22oCDfk2FsRQymeTtzqUxOO6lwguPx5DiPfOi/mFboLPfe7mT8Fdm', NULL, NULL, 'Offline'),
-(3, '$2y$10$.rumMEnLY4cNF5WFw0dsiuWhIJ.UF17cTXg1SnYalfH/BJCihjhlu', 0, 'Active', 'Offline'),
+(3, '$2y$10$.rumMEnLY4cNF5WFw0dsiuWhIJ.UF17cTXg1SnYalfH/BJCihjhlu', 0, 'Active', 'Online'),
 (4, '$2y$10$9bsSfxQII3R489ji8yN3ru37KmDHPoID9af7P5XDJV9.LFv2RD/.C', 0, 'Active', 'Offline'),
 (5, '$2y$10$AgIR6nSZvVBy1G4NvLEulOP1ZT8nBOeisujwX4js3giXexjXFinzG', 0, 'Active', 'Online'),
-(6, '$2y$10$tGCDTYEaOkC6S4qstxOJA.W/9IwLb3WsLfZTPF9r/o1MHvcyPklGK', 0, 'Active', 'Offline'),
+(6, '$2y$10$tGCDTYEaOkC6S4qstxOJA.W/9IwLb3WsLfZTPF9r/o1MHvcyPklGK', 0, 'Active', 'Online'),
 (7, '$2y$10$gsTtjvSvKlXukuMUtlAb1eIkLTAOhx7z0rqxUslivuh.4IrvkE2Uu', 0, 'Active', 'Offline'),
 (8, '$2y$10$UNyCMDSpTwFeCV51lt7gtOzNerK53ISMD7UhPJd9KPBeUENfPMT0W', 0, 'Active', 'Offline'),
 (9, '$2y$10$BkgTKFUxEcMHdlcXHkFKvOBMcF2BuFutEjrW1I130AxaWIF72MHom', 0, 'Active', 'Offline'),
@@ -145,10 +145,19 @@ CREATE TABLE IF NOT EXISTS `utilization` (
   `Date` date NOT NULL,
   `Time` time NOT NULL,
   `Room` varchar(30) NOT NULL,
-  `Purpose` int NOT NULL,
+  `Purpose` varchar(200) NOT NULL,
   PRIMARY KEY (`UtilizationID`),
   KEY `user_util` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `utilization`
+--
+
+INSERT INTO `utilization` (`UtilizationID`, `UserID`, `Date`, `Time`, `Room`, `Purpose`) VALUES
+(1, 6, '2024-02-05', '22:01:00', 'Knowledge Center (D424)', '0'),
+(2, 6, '2024-02-05', '22:02:00', 'TRILL (D422)', '0'),
+(3, 6, '2024-02-05', '22:12:00', 'TRILL (D422)', 'IT Project');
 
 --
 -- Constraints for dumped tables
