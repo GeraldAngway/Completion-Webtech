@@ -1,15 +1,15 @@
 <script src="javascript/login.js" ></script>
 <link rel="stylesheet" href="css/loginn.css">
-
+<div class="box-container">
 <?php
     session_start();
     if(isset($_SESSION['error'])) {
         $error = $_SESSION['error'];
-        echo "<p style='color: red;'>$error</p>";
+        echo "<p style='color: red; text-align: center; '>$error</p>";
         unset($_SESSION['error']);
     }
 ?>
-<div class="box-container">
+
     <img src="images/logo.png" alt="top-logo">
     <header>LOG IN</header>
 <form action="otherpages/login.php" method="post">
@@ -39,10 +39,11 @@
 
     <a href="otherpages/forgot_pass.php">Forgot Password?</a>
 
-</form>
+    </form>
 
 
-<div class="image">
+    <div class="image">
         <img src="images/logo.png" alt="img">
     </div>
+</div>
 </div>

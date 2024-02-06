@@ -78,8 +78,8 @@ if(isset($_GET['idNumber']) && !empty($_GET['idNumber'])) {
                     <td>" . htmlspecialchars($row['Account_Status']) . "</td>
                     <td>   
                         <button $deactivateButtonDisabled onclick='showActivatePopup(\"{$row['UserID']}\")'>Activate</button>
-                        <button $activateButtonDisabled onclick='showDeactivatePopup(\"{$row['UserID']}\")'>Deactivate</button>
-                        <button onclick='showPopup(\"{$row['UserID']}\")'>Delete</button>
+                        <button $activateButtonDisabled onclick='showDeactivatePopup(\"{$row['UserID']}\")' style='background-color: #bac526;'>Deactivate</button>
+                        <button onclick='showPopup(\"{$row['UserID']}\')' style='background-color: #b81010;'>Delete</button>
                     </td>
             </tr>";
         }

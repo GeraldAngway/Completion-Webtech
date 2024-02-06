@@ -1,6 +1,6 @@
 <script src="../javascript/signup.js" defer></script>
 <link rel="stylesheet" href="../css/signup.css">
-
+<div class="box-container">
 <?php
 if (!empty($errors)) {
     echo '<div style="color: red;">';
@@ -11,7 +11,7 @@ if (!empty($errors)) {
 }
 ?>
 
-<div class="box-container">
+
     <img src="../images/logo.png" alt="top-logo">
     <header>SIGN UP</header>
 

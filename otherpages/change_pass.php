@@ -1,6 +1,6 @@
 <script src="../javascript/change.js" defer></script>
 <link rel="stylesheet" href="../css/change.css">
-
+<div class="box-container">
 <?php
 require('require_session.php');
 require('../database/db.php');
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="box-container">
+
     <header>Change Password</header>
 
 <form action="change_pass.php" method="post">

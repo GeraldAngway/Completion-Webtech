@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../css/forgot.css">
-
+<div class="box-container">
 <?php
 require('../database/db.php');
 session_start();
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="box-container">
+
 <header>Forgot Password</header>
 
 <form action="forgot_pass.php" method="post">
