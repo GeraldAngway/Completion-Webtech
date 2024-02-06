@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="check"> 
-    <input type="checkbox" onclick="toggleLoginPassword()">
+    <input type="checkbox" onclick="toggleChangePassword()">
     <span style="color: #060f8a;">Show Password</span>
     </div>
 

@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="../css/view.css">
 <script src="../javascript/admin.js"></script>
 
-
 <div class="box-container">
 
 <div class="logout">
@@ -24,11 +23,11 @@
 <div class="table">
 
 <div class="search">
-            <form method="get" action="admin_viewusers.php">
-                <input type="text" id="idNumber" name="idNumber">
-                <button type="submit">Search</button>
-            </form>
-        </div>
+    <form method="get" action="admin_viewusers.php">
+        <input type="text" id="idNumber" name="idNumber" placeholder="Search ID Number">
+        <button type="submit">Search</button>
+    </form>
+</div>
 
 <table>
     <thead>
@@ -48,17 +47,33 @@
         require('../database/db.php');
         require('../otherpages/require_session.php');
 
+        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
+        $name = "";
+        $role = "";
+
+        if ($userID !== null) {
+            $sqlUser = "SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Role FROM users WHERE UserID = ?";
+            $stmtUser = $db->prepare($sqlUser);
+            $stmtUser->bind_param("i", $userID);
+            $stmtUser->execute();
+            $resultUser = $stmtUser->get_result();
+
+            if ($rowUser = $resultUser->fetch_assoc()) {
+                $name = $rowUser['FullName'];
+                $role = $rowUser['Role'];
+            }
+
+            $stmtUser->close();
+        }
+
         $sql = "SELECT u.UserID, u.IDNum, CONCAT(u.FirstName, ' ', u.LastName) AS Name, u.Program,
             u.Role, a.User_Status, a.Account_Status FROM users u JOIN accounts a ON u.UserID = a.UserID
             WHERE u.Role NOT IN ('Admin', 'admin')";
 
-        // Add filtering by ID number if provided in the search form
-if(isset($_GET['idNumber']) && !empty($_GET['idNumber'])) {
-    $id_number = mysqli_real_escape_string($db, $_GET['idNumber']);
-    $sql .= " AND u.IDNum = '$id_number'";
-}
-
-
+        if(isset($_GET['idNumber']) && !empty($_GET['idNumber'])) {
+            $id_number = mysqli_real_escape_string($db, $_GET['idNumber']);
+            $sql .= " AND u.IDNum = '$id_number'";
+        }
         $result = mysqli_query($db, $sql);
 
         if (!$result) {
@@ -150,4 +165,8 @@ if(isset($_GET['idNumber']) && !empty($_GET['idNumber'])) {
     </form>
     <button class="cancel" onclick='hideAddUserPopup()'>Cancel</button>
 </div>
+
+<p><strong><?php echo $name; ?></strong></p>
+<p><strong><?php echo $role; ?></strong></p>
+
     </div>

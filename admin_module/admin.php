@@ -34,6 +34,26 @@
 </div>
 <?php
 require('../database/db.php');
+require('../otherpages/require_session.php');
+
+$userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
+$name = "";
+$role = "";
+
+if ($userID !== null) {
+    $sqlUser = "SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Role FROM users WHERE UserID = ?";
+    $stmtUser = $db->prepare($sqlUser);
+    $stmtUser->bind_param("i", $userID);
+    $stmtUser->execute();
+    $resultUser = $stmtUser->get_result();
+
+    if ($rowUser = $resultUser->fetch_assoc()) {
+        $name = $rowUser['FullName'];
+        $role = $rowUser['Role'];
+    }
+
+    $stmtUser->close();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['reset'])) {
     $resetUserID = $_POST['resetUserID'];
@@ -85,5 +105,8 @@ if ($result && $result->num_rows > 0) {
 }
 $db->close();
 ?>
+
+<p><strong><?php echo $name; ?></strong></p>
+<p><strong><?php echo $role; ?></strong></p>
 
 </div>

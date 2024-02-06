@@ -49,14 +49,32 @@
                 <tbody>
                 <?php
                     require('../database/db.php');
+                    require('../otherpages/require_session.php');
 
-                    // Check if a search query is submitted
+                    $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : null;
+                            $name = "";
+                            $role = "";
+
+                            if ($userID !== null) {
+                                $sqlUser = "SELECT CONCAT(FirstName, ' ', LastName) AS FullName, Role FROM users WHERE UserID = ?";
+                                $stmtUser = $db->prepare($sqlUser);
+                                $stmtUser->bind_param("i", $userID);
+                                $stmtUser->execute();
+                                $resultUser = $stmtUser->get_result();
+
+                                if ($rowUser = $resultUser->fetch_assoc()) {
+                                    $name = $rowUser['FullName'];
+                                    $role = $rowUser['Role'];
+                                }
+
+                                $stmtUser->close();
+                            }
+
                     if(isset($_GET['idNumber'])) {
                         $searchID = $_GET['idNumber'];
                         $logsSql = "SELECT u.UtilizationID, u.UserID, u.Date, u.Time, u.Room, u.Purpose, us.IDNum FROM utilization u JOIN users us ON u.UserID = us.UserID WHERE us.IDNum = '$searchID'";
                         $logsResult = $db->query($logsSql);
                     } else {
-                        // If no search query, fetch all logs
                         $logsSql = "SELECT u.UtilizationID, u.UserID, u.Date, u.Time, u.Room, u.Purpose, us.IDNum FROM utilization u JOIN users us ON u.UserID = us.UserID";
                         $logsResult = $db->query($logsSql);
                     }
@@ -81,6 +99,9 @@
                 </tbody>
             </table>
         </div>
+
+<p><strong><?php echo $name; ?></strong></p>
+<p><strong><?php echo $role; ?></strong></p>
 
     </div>
 </body>
