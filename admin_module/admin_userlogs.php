@@ -29,7 +29,6 @@
 
         <div class="search">
             <form method="get" action="admin_userlogs.php">
-                <label for="idNumber">Search by ID Number:</label>
                 <input type="text" id="idNumber" name="idNumber">
                 <button type="submit">Search</button>
             </form>

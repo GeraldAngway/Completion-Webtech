@@ -22,6 +22,14 @@
 
     <br><br>
 <div class="table">
+
+<div class="search">
+            <form method="get" action="admin_viewusers.php">
+                <input type="text" id="idNumber" name="idNumber">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
 <table>
     <thead>
         <tr>
@@ -35,15 +43,21 @@
             <th>Action</th>
         </tr>
     </thead>
-
     <tbody>
-    <?php 
+        <?php 
         require('../database/db.php');
         require('../otherpages/require_session.php');
 
         $sql = "SELECT u.UserID, u.IDNum, CONCAT(u.FirstName, ' ', u.LastName) AS Name, u.Program,
             u.Role, a.User_Status, a.Account_Status FROM users u JOIN accounts a ON u.UserID = a.UserID
             WHERE u.Role NOT IN ('Admin', 'admin')";
+
+        // Add filtering by ID number if provided in the search form
+if(isset($_GET['idNumber']) && !empty($_GET['idNumber'])) {
+    $id_number = mysqli_real_escape_string($db, $_GET['idNumber']);
+    $sql .= " AND u.IDNum = '$id_number'";
+}
+
 
         $result = mysqli_query($db, $sql);
 
@@ -69,10 +83,9 @@
                     </td>
             </tr>";
         }
-    ?>
+        ?>
     </tbody>
 </table>
-
         <!-- Delete User Account Popup Form -->
 <div id="deletePopup" class="popup" style="display:none;">
     <form id="deleteForm" action='admin_delete.php' method='post'>
