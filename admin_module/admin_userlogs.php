@@ -29,7 +29,7 @@
 
         <div class="search">
             <form method="get" action="admin_userlogs.php">
-                <input type="text" id="idNumber" name="idNumber">
+                <input type="text" id="idNumber" name="idNumber" placeholder="Search ID Number">
                 <button type="submit">Search</button>
             </form>
         </div>

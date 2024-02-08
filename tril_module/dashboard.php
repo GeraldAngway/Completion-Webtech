@@ -164,7 +164,7 @@
 
     <hr>
     <!-- Logout form -->
-    <form method="post" action="logout.php">
+    <form method="post" action="../otherpages/logout.php">
         <input type="submit" name="logout" value="Logout">
     </form>
     <hr>

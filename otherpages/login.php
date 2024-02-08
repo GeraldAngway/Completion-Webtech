@@ -5,8 +5,8 @@ session_start();
 $idnumber = $_POST['idNum'];
 $password = $_POST['password'];
 
-$sql = "SELECT a.password, u.role, u.UserID, u.IDNum, a.Account_Status 
-        FROM accounts a JOIN users u ON a.UserID = u.UserID 
+$sql = "SELECT a.password, u.role, u.UserID, u.IDNum, a.Account_Status, a.User_Status
+        FROM accounts a JOIN users u ON a.UserID = u.UserID
         WHERE u.IDNum = ?";
 $stmt = $db->prepare($sql);
 $stmt->bind_param("s", $idnumber);
@@ -23,12 +23,13 @@ if ($result->num_rows > 0) {
             exit();
         }
 
+        if ($row['User_Status'] == 'Online') {
+            $_SESSION['error'] = 'User already logged in';
+            header('Location: ../index.php');
+            exit();
+        }
+
         if (password_verify($password, $row['password'])) {
-            if (isset($_SESSION['logged_users']) && in_array($row['UserID'], $_SESSION['logged_users'])) {
-                $_SESSION['error'] = 'User already logged in';
-                header('Location: ../index.php');
-                exit();
-            }
 
             $updateSql = "UPDATE accounts SET User_Status = 'Online' WHERE UserID = ?";
             $updateStmt = $db->prepare($updateSql);
@@ -37,7 +38,7 @@ if ($result->num_rows > 0) {
             $updateStmt->close();
 
             $_SESSION['loggedin'] = true;
-            $_SESSION['userID'] = $row['UserID']; 
+            $_SESSION['userID'] = $row['UserID'];
             $_SESSION['role'] = $row['role'];
             $_SESSION['logged_users'][] = $row['UserID'];
 
