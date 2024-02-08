@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Logs</title>
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/userlogs.css">
 </head>
 <body>
     <div class="box-container">
@@ -33,6 +33,8 @@
                 <button type="submit">Search</button>
             </form>
         </div>
+
+        <br>
 
         <div class="table">
             <table>
@@ -100,8 +102,7 @@
             </table>
         </div>
 
-<p><strong><?php echo $name; ?></strong></p>
-<p><strong><?php echo $role; ?></strong></p>
+<p><strong>Admin <?php echo $name; ?></strong></p>
 
     </div>
 </body>
