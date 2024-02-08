@@ -86,10 +86,10 @@ $result = $db->query($sql);
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
-                <td>" . htmlspecialchars($row['UserID']) . "</td>
-                <td>" . htmlspecialchars($row['IDNum']) . "</td>
-                <td>" . htmlspecialchars($row['FullName']) . "</td>
-                <td>" . htmlspecialchars($row['Role']) . "</td>
+                <td>{$row['UserID']}</td>
+                <td>{$row['IDNum']}</td>
+                <td>{$row['FullName']}</td>
+                <td>{$row['Role']}</td>
                 <td>
                     <form method='POST'>
                         <input type='hidden' name='resetUserID' value='". $row["UserID"] ."'>
@@ -106,7 +106,7 @@ if ($result && $result->num_rows > 0) {
 $db->close();
 ?>
 
-<p><strong><?php echo htmlspecialchars($name); ?></strong></p>
-<p><strong><?php echo htmlspecialchars($role); ?></strong></p>
+<p><strong><?php echo $name; ?></strong></p>
+<p><strong><?php echo $role; ?></strong></p>
 
 </div>
