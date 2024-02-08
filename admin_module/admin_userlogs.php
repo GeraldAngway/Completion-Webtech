@@ -39,7 +39,7 @@
                 <thead>
                     <tr>
                         <th>Utilization ID</th>
-                        <th>Name</th>
+                        <th>ID Number</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Room</th>
