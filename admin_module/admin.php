@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="../css/adm.css">
 
 <div class="box-container">
 
@@ -30,8 +30,9 @@
             <th>Action</th>
         </tr>
     </thead>
-</table>
 </div>
+<tbody>
+
 <?php
 require('../database/db.php');
 require('../otherpages/require_session.php');
@@ -99,14 +100,15 @@ if ($result && $result->num_rows > 0) {
                     </form>
                 </td>
         </tr>";
+        
     }
 } else {
     echo "<tr><td colspan='4'>No Password Reset Request/s</td></tr>";
 }
 $db->close();
 ?>
-
-<p><strong><?php echo $name; ?></strong></p>
-<p><strong><?php echo $role; ?></strong></p>
+</tbody>
+</table>
+<p><strong>Admin <?php echo $name;  ?></strong></p>
 
 </div>

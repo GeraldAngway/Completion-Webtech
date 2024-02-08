@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../css/forgot.css">
+<link rel="stylesheet" href="../css/forg.css">
 <div class="box-container">
 <?php
 require('../database/db.php');

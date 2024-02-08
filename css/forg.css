@@ -13,12 +13,10 @@ body {
     background-color: #fafafac9;
     width: 60%;
     max-width: 40%;
-    height: 40vh;
+    height: 50vh;
     padding: 35px;
     border-radius: 5px;
     box-shadow: 0 0 2pxrgba(116, 116, 116, 0.678);
-
-
 }
 
 header {
@@ -95,10 +93,14 @@ header {
     background-color: #040a55;
 }
 
+.role label {
+    color: #060f8a;
+    margin-left: 15%;
+}
 
 select {
-    width: 23%;
     height: 32px;
-    margin-left: .7%;
-    margin-bottom: 15px;
+    margin-left: 15%;
+    margin-bottom: 30px;
+    width: 40%;
 }
