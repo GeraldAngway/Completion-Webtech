@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="../css/view.css">
 <script src="../javascript/admin.js"></script>
+<script src="../javascript/delete.js"></script>
 
 <div class="box-container">
 
@@ -94,7 +95,7 @@
                     <td>   
                         <button $deactivateButtonDisabled onclick='showActivatePopup(\"{$row['UserID']}\")'>Activate</button>
                         <button $activateButtonDisabled onclick='showDeactivatePopup(\"{$row['UserID']}\")' style='background-color: #bac526;'>Deactivate</button>
-                        <button onclick='showPopup(\"{$row['UserID']}\')' style='background-color: #b81010;'>Delete</button>
+                        <button onclick='showPopup(\"{$row['UserID']}\")'>Delete</button>
                     </td>
             </tr>";
         }
@@ -166,7 +167,7 @@
     <button class="cancel" onclick='hideAddUserPopup()'>Cancel</button>
 </div>
 
-<p><strong><?php echo $name; ?></strong></p>
-<p><strong><?php echo $role; ?></strong></p>
+<p><strong><?php echo htmlspecialchars($name); ?></strong></p>
+<p><strong><?php echo htmlspecialchars($role); ?></strong></p>
 
-    </div>
+</div>

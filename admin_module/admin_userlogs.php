@@ -82,12 +82,12 @@
                     if ($logsResult && $logsResult->num_rows > 0) {
                         while ($logRow = $logsResult->fetch_assoc()) {
                             echo "<tr>
-                                    <td>{$logRow['UtilizationID']}</td>
-                                    <td>{$logRow['IDNum']}</td>
-                                    <td>{$logRow['Date']}</td>
-                                    <td>{$logRow['Time']}</td>
-                                    <td>{$logRow['Room']}</td>
-                                    <td>{$logRow['Purpose']}</td>
+                                    <td>" . htmlspecialchars($logRow['UtilizationID']) . "</td>
+                                    <td>" . htmlspecialchars($logRow['IDNum']) . "</td>
+                                    <td>" . htmlspecialchars($logRow['Date']) . "</td>
+                                    <td>" . htmlspecialchars($logRow['Time']) . "</td>
+                                    <td>" . htmlspecialchars($logRow['Room']) . "</td>
+                                    <td>" . htmlspecialchars($logRow['Purpose']) . "</td>
                                 </tr>";
                         }
                     } else {
@@ -100,8 +100,8 @@
             </table>
         </div>
 
-<p><strong><?php echo $name; ?></strong></p>
-<p><strong><?php echo $role; ?></strong></p>
+<p><strong><?php echo htmlspecialchars($name); ?></strong></p>
+<p><strong><?php echo htmlspecialchars($role); ?></strong></p>
 
     </div>
 </body>

@@ -67,10 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtAccounts->bind_param("isiss", $userID, $hashedPassword, $passwordStatus, $accountStatus, $userStatus);
     
             if ($stmtAccounts->execute()) {
-                
-                $_SESSION['idNum'] = $idNumber;  
-                header("Location: ../otherpages/login.php"); 
-                exit();
+             echo "<script>
+                    alert('Account Successfully Registered');
+                    window.location.href = '../index.php';
+                    </script>";
             } else {
                 $errors[] = $stmtAccounts->error;
             }
@@ -84,7 +84,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->close();
     }
 }
-
-// Include signup_form.php only if there are errors or form has not been submitted
 include 'signup_form.php';
 ?>

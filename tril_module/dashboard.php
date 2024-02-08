@@ -131,25 +131,25 @@
         // Output data for each row
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
-                    <td>{$row['FirstName']} {$row['LastName']}</td>
-                    <td>{$row['IDNum']}</td>
-                    <td>{$row['Program']}</td>
-                    <td>{$row['Purpose']}</td>
-                    <td>{$row['Room']}</td>
-                    <td>{$row['Date']}</td>
-                    <td>{$row['Time']}</td>
-                </tr>";
+                    <td>" . htmlspecialchars($row['FirstName'] . ' ' . $row['LastName']) . "</td>
+                    <td>" . htmlspecialchars($row['IDNum']) . "</td>
+                    <td>" . htmlspecialchars($row['Program']) . "</td>
+                    <td>" . htmlspecialchars($row['Purpose']) . "</td>
+                    <td>" . htmlspecialchars($row['Room']) . "</td>
+                    <td>" . htmlspecialchars($row['Date']) . "</td>
+                    <td>" . htmlspecialchars($row['Time']) . "</td>
+                  </tr>";
         }
         echo "</table>";
     } else {
         if (!empty($searchIDNumber)) {
-            echo "No utilization records found for ID Number: $searchIDNumber.";
+            echo "No utilization records found for ID Number: " . htmlspecialchars($searchIDNumber) . ".";
         } elseif (!empty($searchStudentName)) {
-            echo "No utilization records found for Student Name: $searchStudentName.";
+            echo "No utilization records found for Student Name: " . htmlspecialchars($searchStudentName) . ".";
         } elseif (!empty($searchPurpose)) {
-            echo "No utilization records found for Purpose: $searchPurpose.";
+            echo "No utilization records found for Purpose: " . htmlspecialchars($searchPurpose) . ".";
         } elseif (!empty($searchProgram)) {
-            echo "No utilization records found for Program: $searchProgram.";
+            echo "No utilization records found for Program: " . htmlspecialchars($searchProgram) . ".";
         } else {
             echo "No utilization records found.";
         }

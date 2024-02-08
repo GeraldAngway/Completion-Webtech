@@ -101,7 +101,7 @@ $db->close();
 
 <div class="container">
 <div class="user-info">
-    <p>Welcome, <strong><?php echo $userFirstName; ?></strong> <strong><?php echo $userLastName; ?></strong></p>
+    <p>Welcome, <strong><?php echo htmlspecialchars($userFirstName); ?></strong> <strong><?php echo htmlspecialchars($userLastName); ?></strong></p>
 </div>
     <div class="logout">
     <form method="post" action="../otherpages/logout.php">
@@ -139,10 +139,10 @@ $db->close();
             </tr>
             <?php foreach ($utilizationRows as $row): ?>
                 <tr>
-                    <td><?php echo $row['Date']; ?></td>
-                    <td><?php echo $row['Time']; ?></td>
-                    <td><?php echo $row['Room']; ?></td>
-                    <td><?php echo $row['Purpose']; ?></td>
+                    <td><?php echo htmlspecialchars($row['Date']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Time']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Room']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Purpose']); ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>
