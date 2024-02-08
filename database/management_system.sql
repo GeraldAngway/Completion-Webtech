@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 05, 2024 at 02:14 PM
+-- Generation Time: Feb 08, 2024 at 03:37 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -44,15 +44,15 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 INSERT INTO `accounts` (`UserID`, `Password`, `Password_Status`, `Account_Status`, `User_Status`) VALUES
 (1, '$2y$10$0VBaBwUYQaQyRQJpLrtkyuHucAwOBh/OYmvKg3UfxTUisjvcpISy.', NULL, NULL, 'Offline'),
 (2, '$2y$10$22oCDfk2FsRQymeTtzqUxOO6lwguPx5DiPfOi/mFboLPfe7mT8Fdm', NULL, NULL, 'Offline'),
-(3, '$2y$10$.rumMEnLY4cNF5WFw0dsiuWhIJ.UF17cTXg1SnYalfH/BJCihjhlu', 0, 'Active', 'Online'),
-(4, '$2y$10$9bsSfxQII3R489ji8yN3ru37KmDHPoID9af7P5XDJV9.LFv2RD/.C', 0, 'Active', 'Offline'),
-(5, '$2y$10$AgIR6nSZvVBy1G4NvLEulOP1ZT8nBOeisujwX4js3giXexjXFinzG', 0, 'Active', 'Online'),
-(6, '$2y$10$tGCDTYEaOkC6S4qstxOJA.W/9IwLb3WsLfZTPF9r/o1MHvcyPklGK', 0, 'Active', 'Online'),
+(3, '$2y$10$.rumMEnLY4cNF5WFw0dsiuWhIJ.UF17cTXg1SnYalfH/BJCihjhlu', 0, 'Active', 'Offline'),
+(4, '$2y$10$9bsSfxQII3R489ji8yN3ru37KmDHPoID9af7P5XDJV9.LFv2RD/.C', 1, 'Active', 'Offline'),
+(5, '$2y$10$AgIR6nSZvVBy1G4NvLEulOP1ZT8nBOeisujwX4js3giXexjXFinzG', 0, 'Active', 'Offline'),
+(6, '$2y$10$tGCDTYEaOkC6S4qstxOJA.W/9IwLb3WsLfZTPF9r/o1MHvcyPklGK', 0, 'Active', 'Offline'),
 (7, '$2y$10$gsTtjvSvKlXukuMUtlAb1eIkLTAOhx7z0rqxUslivuh.4IrvkE2Uu', 0, 'Active', 'Offline'),
-(8, '$2y$10$UNyCMDSpTwFeCV51lt7gtOzNerK53ISMD7UhPJd9KPBeUENfPMT0W', 0, 'Active', 'Offline'),
+(8, '$2y$10$MtrBhukT9ajpBQZvknEo9uYO3GsXKt/x5b9qmTNJhXEEpX.Ndp2nm', 1, 'Active', 'Offline'),
 (9, '$2y$10$BkgTKFUxEcMHdlcXHkFKvOBMcF2BuFutEjrW1I130AxaWIF72MHom', 0, 'Active', 'Offline'),
 (10, '$2y$10$ABAIVOrjODMEaYUXHRppIuGQ.efHjzva.PUSFnVkRSG.IX82HmdGS', 0, 'Active', 'Offline'),
-(11, '$2y$10$eBVIQILzXkedDtb7qHVM..EdLj3LHQljgK6zbbzNoT1LZmqYxs9Kq', 0, 'Active', 'Offline');
+(11, '$2y$10$eBVIQILzXkedDtb7qHVM..EdLj3LHQljgK6zbbzNoT1LZmqYxs9Kq', 1, 'Active', 'Offline');
 
 -- --------------------------------------------------------
 
@@ -81,22 +81,6 @@ INSERT INTO `slu` (`IDNumber`) VALUES
 ('2212582'),
 ('2194874'),
 ('2222783');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `userlogs`
---
-
-DROP TABLE IF EXISTS `userlogs`;
-CREATE TABLE IF NOT EXISTS `userlogs` (
-  `LogID` int NOT NULL AUTO_INCREMENT,
-  `UserID` int NOT NULL,
-  `Action` varchar(250) NOT NULL,
-  `Timestamp` timestamp NOT NULL,
-  PRIMARY KEY (`LogID`),
-  KEY `user_logs` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -148,16 +132,17 @@ CREATE TABLE IF NOT EXISTS `utilization` (
   `Purpose` varchar(200) NOT NULL,
   PRIMARY KEY (`UtilizationID`),
   KEY `user_util` (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `utilization`
 --
 
 INSERT INTO `utilization` (`UtilizationID`, `UserID`, `Date`, `Time`, `Room`, `Purpose`) VALUES
-(1, 6, '2024-02-05', '22:01:00', 'Knowledge Center (D424)', '0'),
-(2, 6, '2024-02-05', '22:02:00', 'TRILL (D422)', '0'),
-(3, 6, '2024-02-05', '22:12:00', 'TRILL (D422)', 'IT Project');
+(7, 10, '2024-02-09', '11:10:00', 'Knowledge Center (D424)', 'IT Project'),
+(8, 10, '2024-02-10', '13:00:00', 'BYOD (D426)', 'Research'),
+(9, 8, '2024-02-09', '08:30:00', 'Knowledge Center (D424)', 'Group Meeting and Cosultation'),
+(10, 7, '2024-02-10', '07:30:00', 'TRILL (D422)', '<h1>Group Project</h1>');
 
 --
 -- Constraints for dumped tables
@@ -168,12 +153,6 @@ INSERT INTO `utilization` (`UtilizationID`, `UserID`, `Date`, `Time`, `Room`, `P
 --
 ALTER TABLE `accounts`
   ADD CONSTRAINT `user_acc` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `userlogs`
---
-ALTER TABLE `userlogs`
-  ADD CONSTRAINT `user_logs` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `utilization`

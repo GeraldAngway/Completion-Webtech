@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="../css/view.css">
 <script src="../javascript/admin.js"></script>
-<script src="../javascript/delete.js"></script>
 
 <div class="box-container">
 
@@ -167,7 +166,6 @@
     <button class="cancel" onclick='hideAddUserPopup()'>Cancel</button>
 </div>
 
-<p><strong><?php echo htmlspecialchars($name); ?></strong></p>
-<p><strong><?php echo htmlspecialchars($role); ?></strong></p>
+<p><strong>Admin <?php echo htmlspecialchars($name);  ?></strong></p>
 
 </div>
